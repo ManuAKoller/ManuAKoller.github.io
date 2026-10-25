@@ -1,0 +1,1107 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>A Secondary Market for Unused AI Usage — Manuel A. Koller</title>
+<meta name="description" content="A three-stage proposal: credit paid usage on upgrade, an in-platform market for unused Grok usage blocks, then futures. Independent proposal by a Grok user. Not affiliated with xAI.">
+<meta name="author" content="Manuel A. Koller">
+<meta property="og:type" content="article">
+<meta property="og:title" content="A Secondary Market for Unused AI Usage">
+<meta property="og:description" content="A three-stage proposal: credit paid usage on upgrade, let unused Grok usage blocks be resold inside the platform, then add futures. Independent proposal by a Grok user.">
+<meta property="og:image" content="https://manuakoller.github.io/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://manuakoller.github.io/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:creator" content="@ManuAKoller">
+<meta name="twitter:title" content="A Secondary Market for Unused AI Usage">
+<meta name="twitter:description" content="Three stages: credit on upgrade, an in-platform market for unused usage blocks, then futures. Independent proposal by a Grok user.">
+<meta name="twitter:image" content="https://manuakoller.github.io/og.png">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230B5CD5'/%3E%3Crect x='14' y='34' width='9' height='16' rx='2' fill='%23ffffff' opacity='.55'/%3E%3Crect x='27.5' y='24' width='9' height='26' rx='2' fill='%23ffffff' opacity='.8'/%3E%3Crect x='41' y='14' width='9' height='36' rx='2' fill='%23ffffff'/%3E%3C/svg%3E">
+<meta name="theme-color" content="#0e0e11">
+<script>document.documentElement.classList.add("js")</script>
+<style>
+:root{--bg:#ffffff;--paper:#ffffff;--soft:#f5f5f7;--line:#e2e2e8;--rule:#1d1d22;--tx:#141418;--mut:#4f4f5a;--dim:#6b6b76;
+--acc:#0B5CD5;--acc2:#008545;--neg:#D60A22;--warn:#6b6b76;--warnbg:transparent;--okbg:#eef8f2;--negbg:#fdeef0;--grid:#ececf1;--btx:#ffffff;
+--serif:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,"Times New Roman",serif;
+--sans:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Inter,Helvetica,Arial,sans-serif;--rad:3px;--max:1060px;--txt:760px}
+[data-theme=dark]{--bg:#0e0e11;--paper:#141418;--soft:#1b1b20;--line:#2a2a31;--rule:#d8d8de;--tx:#ececf1;--mut:#b0b0bb;--dim:#8c8c98;
+--acc:#4DA3FF;--acc2:#21b45f;--neg:#ff5a6a;--warn:#8c8c98;--warnbg:transparent;--okbg:#0f2219;--negbg:#2a1216;--grid:#222229;--btx:#0e0e11}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--tx);font:16.5px/1.65 var(--sans);-webkit-font-smoothing:antialiased;overflow-x:hidden;transition:background .3s,color .3s}
+a{color:var(--acc);text-decoration:none}a:hover{text-decoration:underline}
+b,strong{font-weight:650;color:var(--tx)}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 24px}
+nav{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;align-items:center;gap:14px;height:56px}
+.brand{display:flex;align-items:center;gap:9px;font-weight:650;font-size:14.5px;color:var(--tx);white-space:nowrap}
+.brand:hover{text-decoration:none}
+.brand svg{flex:0 0 22px}
+.links{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;flex:1;min-width:0;justify-content:safe center}
+.links::-webkit-scrollbar{display:none}
+.links a{color:var(--mut);font-size:13.5px;padding:6px 10px;border-radius:7px;white-space:nowrap}
+.links a:hover{color:var(--tx);background:var(--soft);text-decoration:none}
+.links a.on{color:var(--acc);background:var(--soft)}
+.tools{display:flex;gap:8px;align-items:center}
+.lang{display:flex;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--paper)}
+.lang button{border:0;background:none;color:var(--mut);font:600 12.5px var(--sans);padding:6px 10px;cursor:pointer;letter-spacing:.03em}
+.lang button.on{background:var(--tx);color:var(--bg)}
+.ib{width:34px;height:32px;display:grid;place-items:center;border:1px solid var(--line);border-radius:8px;background:var(--paper);color:var(--mut);cursor:pointer}
+.ib:hover{color:var(--tx)}
+.prog{position:absolute;left:0;bottom:-1px;height:2px;width:0;background:var(--acc)}
+.hero{padding-top:84px;padding-bottom:56px;border-bottom:1px solid var(--line)}
+.eyebrow{font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--acc);font-weight:700}
+h1{font-family:var(--serif);font-weight:600;font-size:clamp(36px,5.6vw,62px);line-height:1.08;letter-spacing:-.015em;margin:16px 0 18px;max-width:18ch}
+.sub{font-size:clamp(17px,2vw,20px);color:var(--mut);max-width:62ch}
+.byline{display:flex;flex-wrap:wrap;gap:8px 22px;align-items:center;margin-top:28px;font-size:14px;color:var(--mut)}
+.byline .who{display:flex;align-items:center;gap:10px;color:var(--tx);font-weight:600}
+.av{width:34px;height:34px;border-radius:50%;background:var(--tx);color:var(--bg);display:grid;place-items:center;font:700 13px var(--sans);flex:0 0 auto}
+.sep{width:1px;height:16px;background:var(--line)}
+.cta{display:flex;gap:10px;flex-wrap:wrap;margin-top:28px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:11px 18px;border-radius:9px;font:600 14.5px var(--sans);border:1px solid var(--line);background:var(--paper);color:var(--tx);cursor:pointer;transition:border-color .2s,background .2s}
+.btn:hover{border-color:var(--dim);text-decoration:none}
+.btn.p{background:var(--tx);color:var(--bg);border-color:var(--tx)}
+.disc{margin-top:22px;font-size:12.5px;color:var(--dim)}
+.summary{padding-top:44px;padding-bottom:44px}
+.sumbox{background:var(--paper);border:1px solid var(--line);border-left:3px solid var(--acc);border-radius:var(--rad);padding:28px 30px}
+.sumbox h2{font-size:22px;margin:0 0 14px}
+.sumbox ol{list-style:none;counter-reset:s;display:grid;gap:12px}
+.sumbox li{counter-increment:s;position:relative;padding-left:34px;color:var(--mut)}
+.sumbox li:before{content:counter(s);position:absolute;left:0;top:2px;width:22px;height:22px;border-radius:6px;background:var(--soft);color:var(--acc);font:700 12px/22px var(--sans);text-align:center}
+section.sec{padding-top:64px;padding-bottom:64px;border-top:1px solid var(--line);scroll-margin-top:56px}
+.summary{scroll-margin-top:56px}
+.sh{display:flex;gap:18px;align-items:baseline}
+.sn{font:600 15px var(--sans);color:var(--acc);min-width:28px;font-variant-numeric:tabular-nums}
+h2{font-family:var(--serif);font-weight:600;font-size:clamp(26px,3.4vw,36px);line-height:1.15;letter-spacing:-.01em}
+h3{font-size:17px;font-weight:650;letter-spacing:-.005em}
+.lead{color:var(--mut);font-size:17px;max-width:var(--txt);margin-top:14px}
+.body{padding-left:46px}
+.cards{display:grid;gap:14px;margin-top:28px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:var(--rad);padding:22px}
+.card h3{margin-bottom:6px}
+.card p{color:var(--mut);font-size:15px}
+.card .k{font:600 12px var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--dim);margin-bottom:8px}
+.note{font-size:13px;color:var(--dim);margin-top:14px}
+.illus{display:inline-flex;gap:7px;align-items:center;font-size:12.5px;color:var(--warn);background:var(--warnbg);border:1px solid color-mix(in srgb,var(--warn) 25%,transparent);padding:5px 10px;border-radius:7px;margin-top:14px}
+.js .reveal{opacity:0;transform:translateY(10px);transition:opacity .6s ease,transform .6s ease}
+.reveal.in{opacity:1;transform:none}
+ul.ck{list-style:none;margin-top:16px;max-width:var(--txt)}
+ul.ck li{padding:6px 0 6px 24px;position:relative;color:var(--mut)}
+ul.ck li:before{content:"";position:absolute;left:3px;top:15px;width:7px;height:7px;border-radius:2px;background:var(--acc)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:28px}
+.two.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+.stage{background:var(--paper);border:1px solid var(--line);border-radius:var(--rad);padding:26px}
+.stage .num{font:600 13px var(--sans);color:var(--acc);letter-spacing:.06em;text-transform:uppercase}
+.stage h3{font-family:var(--serif);font-size:22px;font-weight:600;margin:6px 0 8px}
+.stage p{color:var(--mut);font-size:15.5px}
+.tag{display:inline-block;margin-top:14px;font:600 12px var(--sans);padding:3px 9px;border-radius:6px;background:var(--soft);color:var(--mut)}
+.split{display:grid;grid-template-columns:1.15fr 1fr;gap:34px;align-items:start}
+.bvcap{font-size:13.5px;color:var(--mut);font-weight:600}
+.blockviz{display:grid;grid-template-columns:repeat(10,1fr);gap:5px;margin:14px 0 16px}
+.blk{aspect-ratio:1;border-radius:4px;background:var(--acc);opacity:.15;transition:opacity .5s}
+.in .blk{opacity:.85}
+.in .blk:nth-child(3n){opacity:.6}
+.mks{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.mk{padding:14px 16px;border-radius:10px;border:1px solid var(--line);background:var(--paper)}
+.mk b{font-size:15px;display:block}.mk small{color:var(--mut);font-size:13px}
+.panel{margin-top:28px;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:24px}
+.ph{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;border-bottom:1px solid var(--line);padding-bottom:14px;margin-bottom:20px}
+.ph h3{font-size:15px}
+.ph .illus{margin-top:0}
+.sim{display:grid;grid-template-columns:300px minmax(0,1fr);gap:30px}
+.ctrl label,.ctrl .lbl{display:flex;justify-content:space-between;gap:10px;font-size:13.5px;color:var(--mut);margin:20px 0 6px;font-weight:600}
+.ctrl label:first-child,.ctrl .lbl:first-child{margin-top:0}
+.ctrl output,.ctrl .out{color:var(--tx);font-variant-numeric:tabular-nums;white-space:nowrap}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:30px;background:transparent;touch-action:pan-y}
+input[type=range]::-webkit-slider-runnable-track{height:4px;border-radius:4px;background:linear-gradient(90deg,var(--acc) var(--p,50%),var(--line) var(--p,50%))}
+input[type=range]::-moz-range-track{height:4px;border-radius:4px;background:var(--line)}
+input[type=range]::-moz-range-progress{height:4px;background:var(--acc)}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:var(--paper);border:2px solid var(--acc);margin-top:-8px;box-shadow:0 1px 3px rgba(0,0,0,.2)}
+input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;background:var(--paper);border:2px solid var(--acc)}
+input[type=range]:focus-visible{outline:2px solid var(--acc);outline-offset:2px;border-radius:4px}
+.seg{display:flex;border:1px solid var(--line);border-radius:9px;padding:3px;background:var(--soft)}
+.seg button{flex:1;border:0;background:none;color:var(--mut);font:600 13.5px var(--sans);padding:8px 6px;border-radius:7px;cursor:pointer;transition:background .2s,color .2s}
+.seg button.on{background:var(--paper);color:var(--tx);box-shadow:0 1px 2px rgba(0,0,0,.12)}
+.chips{display:flex;gap:6px;margin-top:6px}
+.chips button{flex:1;border:1px solid var(--line);background:var(--paper);color:var(--mut);font:600 12.5px var(--sans);padding:7px;border-radius:7px;cursor:pointer}
+.chips button:hover{color:var(--tx);border-color:var(--dim)}
+.badge{margin-top:18px;padding:10px 12px;border-radius:9px;font-size:13.5px;line-height:1.45;border:1px solid var(--line);background:var(--soft);color:var(--mut);min-height:44px;transition:background .3s,border-color .3s,color .3s}
+.badge.g{background:var(--okbg);border-color:color-mix(in srgb,var(--acc2) 35%,transparent);color:var(--acc2)}
+.badge.r{background:var(--negbg);border-color:color-mix(in srgb,var(--neg) 35%,transparent);color:var(--neg)}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.stat{border:1px solid var(--line);border-radius:10px;padding:12px 14px;background:var(--paper);transition:border-color .3s;min-width:0}
+.stat small{display:flex;align-items:center;gap:7px;color:var(--mut);font-size:12.5px;font-weight:600}
+.stat small i{width:10px;height:3px;border-radius:2px;display:inline-block;flex:0 0 10px}
+.stat .big{font-size:clamp(24px,3.2vw,32px);font-weight:650;letter-spacing:-.02em;font-variant-numeric:tabular-nums;line-height:1.2;margin-top:4px}
+.stat .big span{font-size:.5em;color:var(--mut);font-weight:600;margin-left:2px}
+.stat .u{font-size:12px;color:var(--dim)}
+.stat.hot{border-color:var(--acc2)}.stat.cold{border-color:var(--neg)}
+.chart{width:100%;height:auto;display:block;margin-top:14px}
+.chart .gl{stroke:var(--grid)}.chart .tk{fill:var(--dim);font:11px var(--sans)}
+.chart .cx{stroke:var(--acc)}.chart .cm{stroke:var(--acc2)}.chart .am{fill:var(--acc2);opacity:.08}
+.chart .fl{stroke:var(--neg)}.chart .ll{stroke:var(--dim)}.chart .vl{stroke:var(--dim);opacity:.5}
+.chart .dx{fill:var(--acc);stroke:var(--paper)}.chart .dm{fill:var(--acc2);stroke:var(--paper)}
+.chart .tf{fill:var(--neg);font:600 11.5px var(--sans)}.chart .tl{fill:var(--dim);font:11.5px var(--sans)}
+.legend{display:flex;gap:6px 16px;flex-wrap:wrap;font-size:12.5px;color:var(--mut);margin-top:6px}
+.legend i{display:inline-block;width:14px;height:3px;border-radius:2px;margin-right:6px;vertical-align:middle}
+.formula{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:13.5px;background:var(--soft);border:1px solid var(--line);border-radius:9px;padding:12px 14px;color:var(--tx);overflow-wrap:anywhere}
+.model{font-size:12.5px;color:var(--dim);margin-top:14px;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;overflow-wrap:anywhere}
+.flow svg{width:100%;height:auto;display:block}
+.flow .nd{fill:var(--paper);stroke:var(--line);stroke-width:1.5}
+.flow .nd.m{stroke:var(--acc)}.flow .nd.f{stroke:var(--warn)}
+.flow .t1{fill:var(--tx);font:650 19px var(--sans)}.flow .t2{fill:var(--mut);font:13px var(--sans)}
+.flow .ln{fill:none;stroke:var(--line);stroke-width:2}
+.flow .lit{fill:none;stroke-width:2.5;stroke-linecap:round;stroke-dasharray:1000;stroke-dashoffset:1000;transition:stroke-dashoffset 1.6s ease}
+.flow.in .lit{stroke-dashoffset:0}
+.flow .a1,.flow .a2{stroke:var(--acc)}.flow .a3{stroke:var(--warn)}.flow .a4{stroke:var(--acc2)}
+.flow .pk{opacity:0;transition:opacity .4s 1.6s}.flow.in .pk{opacity:1}
+.flow .p1{fill:var(--acc)}.flow .p3{fill:var(--warn)}.flow .p4{fill:var(--acc2)}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:16px}
+.steps div{font-size:14px;color:var(--mut);padding:12px 14px;border-radius:10px;background:var(--soft)}
+.steps b{display:block;font-size:14px}
+.weeks{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:18px}
+.wk{padding:20px;border-radius:var(--rad);background:var(--paper);border:1px solid var(--line);min-width:0}
+.wk canvas{width:100%;height:160px;display:block;margin-top:10px}
+.wk p{color:var(--mut);font-size:14px;margin-top:8px}
+h4{font-size:16px;font-weight:650;margin-top:40px}
+.fut{display:grid;grid-template-columns:1fr 1fr;gap:30px;align-items:start}
+.fbig{font-size:clamp(44px,6vw,60px);font-weight:650;letter-spacing:-.03em;line-height:1.1;font-variant-numeric:tabular-nums}
+.fbig span{font-size:.3em;color:var(--mut);font-weight:600;letter-spacing:0}
+.fbar{height:10px;border-radius:6px;background:var(--soft);border:1px solid var(--line);overflow:hidden;margin:14px 0 6px;position:relative}
+.fbar i{position:absolute;inset:0 auto 0 0;background:var(--acc);transition:width .4s ease}
+.fbar u{position:absolute;top:0;bottom:0;width:2px;background:var(--neg)}
+.fscale{display:flex;justify-content:space-between;font-size:12px;color:var(--dim)}
+.rules{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));margin-top:24px;border:1px solid var(--line);border-radius:var(--rad);overflow:hidden;background:var(--paper)}
+.rule{display:flex;gap:14px;padding:14px 18px;border-bottom:1px solid var(--line);border-right:1px solid var(--line);margin:0 -1px -1px 0}
+.rule .n{flex:0 0 30px;font:600 13px/22px var(--sans);color:var(--acc);font-variant-numeric:tabular-nums}
+.rule p{font-size:14.5px;color:var(--mut)}
+.road{margin-top:28px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.road .card{border-top:3px solid var(--line)}
+.road .card:nth-child(1){border-top-color:var(--acc)}
+.road .card:nth-child(2){border-top-color:color-mix(in srgb,var(--acc) 60%,var(--line))}
+.road .card:nth-child(3){border-top-color:color-mix(in srgb,var(--acc) 30%,var(--line))}
+.qs{counter-reset:q;list-style:none;margin-top:22px;max-width:var(--txt)}
+.qs li{counter-increment:q;padding:12px 0 12px 44px;position:relative;border-bottom:1px solid var(--line);color:var(--mut)}
+.qs li:before{content:"Q" counter(q);position:absolute;left:0;top:12px;font:600 13px var(--sans);color:var(--acc)}
+.closing{padding-top:64px;padding-bottom:40px;border-top:1px solid var(--line)}
+.author{display:flex;gap:16px;align-items:center;margin-top:24px;padding:18px 20px;border:1px solid var(--line);border-radius:var(--rad);background:var(--paper);max-width:600px}
+.author .av{width:46px;height:46px;font-size:16px}
+.author div small{display:block;color:var(--mut);font-size:13.5px}
+footer{border-top:1px solid var(--line);padding:26px 0 46px;color:var(--dim);font-size:13px}
+footer p+p{margin-top:4px}
+.print-only{display:none}
+.links a{flex:0 0 auto}
+/* ===== editorial restyle ===== */
+body{font-size:16px;line-height:1.55}
+nav{background:var(--bg);backdrop-filter:none;-webkit-backdrop-filter:none;border-bottom:1px solid var(--line)}
+nav .wrap{height:52px;gap:28px}
+.brand{font:700 17px/1 var(--serif);letter-spacing:-.01em;gap:12px}
+.brand em{font-style:normal}
+.brand span{font:500 12px var(--sans);color:var(--dim);letter-spacing:.06em;text-transform:uppercase;padding-left:12px;border-left:1px solid var(--line)}
+.links{justify-content:flex-start;gap:22px;align-self:stretch}
+.links a{padding:0;border-radius:0;font-size:13.5px;color:var(--mut);display:flex;align-items:center;border-bottom:2px solid transparent;margin-bottom:-1px}
+.links a:hover{background:none;color:var(--tx)}
+.links a.on{background:none;color:var(--tx);border-bottom-color:var(--acc)}
+.tools{gap:14px}
+.lang{border:0;border-radius:0;background:none;gap:0}
+.lang button{padding:4px 6px;font-size:12px;color:var(--dim)}
+.lang button+button{border-left:1px solid var(--line)}
+.lang button.on{background:none;color:var(--tx);text-decoration:underline;text-decoration-color:var(--acc);text-underline-offset:5px;text-decoration-thickness:2px}
+.ib{border:0;background:none;width:28px;height:28px;border-radius:0}
+.prog{height:2px;background:var(--acc)}
+.hero{padding-top:64px;padding-bottom:40px}
+.eyebrow{font-size:12px;letter-spacing:.08em;color:var(--acc)}
+h1{font-size:clamp(34px,5vw,54px);letter-spacing:-.02em;margin:12px 0 16px;line-height:1.05}
+.sub{font-size:clamp(17px,1.8vw,19px);line-height:1.5}
+.byline{margin-top:24px;font-size:13.5px;gap:6px 16px;padding-top:16px;border-top:1px solid var(--line);max-width:680px}
+.byline .who{gap:6px}
+.byline .av{display:none}
+.cta{margin-top:24px}
+.btn{border-radius:3px;padding:10px 16px;font-size:14px}
+.btn.p{background:var(--acc);border-color:var(--acc);color:var(--btx)}
+.summary{padding-top:32px;padding-bottom:40px}
+.sumbox{background:none;border:0;border-top:2px solid var(--rule);border-radius:0;padding:16px 0 0}
+.sumbox h2{font:700 12px var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--tx);margin-bottom:16px}
+.sumbox ol{grid-template-columns:repeat(2,minmax(0,1fr));gap:16px 40px}
+.sumbox li{padding-left:28px;font-size:15px}
+.sumbox li:before{background:none;border-radius:0;color:var(--acc);text-align:left;font-size:13px;top:1px}
+section.sec{padding-top:56px;padding-bottom:56px}
+.sh{gap:16px}
+.sn{font:700 13px var(--sans);color:var(--dim)}
+h2{font-size:clamp(26px,3vw,32px);letter-spacing:-.015em}
+.lead{font-size:16.5px}
+.cards{gap:0 32px;margin-top:24px}
+.card{background:none;border:0;border-top:1px solid var(--rule);border-radius:0;padding:14px 0 0}
+.card .k{font-size:11.5px;color:var(--acc);margin-bottom:6px;letter-spacing:.08em}
+.two{gap:0 40px}
+.stage{background:none;border:0;border-top:2px solid var(--rule);border-radius:0;padding:16px 0 0}
+.stage h3{font-size:21px}
+.tag{background:none;padding:0;border-radius:0;font-size:12px;color:var(--dim);letter-spacing:.06em;text-transform:uppercase}
+.tag:before{content:"— "}
+ul.ck li:before{border-radius:0;width:6px;height:1.5px;top:17px;background:var(--tx)}
+.split .card{border-top:1px solid var(--rule)}
+.blockviz{gap:3px}.blk{border-radius:0;background:var(--acc)}
+.mks{gap:0;border-top:1px solid var(--line)}
+.mk{border:0;border-radius:0;padding:10px 0;background:none}
+.mk+.mk{border-left:1px solid var(--line);padding-left:16px}
+.panel{border-radius:0;border:1px solid var(--line);border-top:2px solid var(--rule);background:var(--paper);padding:20px 24px}
+.ph{padding-bottom:12px;margin-bottom:18px}
+.ph h3{font-size:13px;letter-spacing:.08em;text-transform:uppercase}
+.illus{background:none;border:0;padding:0;margin-top:10px;color:var(--dim);font-style:italic;font-size:12.5px;border-radius:0}
+.illus:before{content:"*";font-style:normal;color:var(--acc);margin-right:2px}
+.ph .illus{margin-top:0}
+.seg{border-radius:3px;padding:2px;background:var(--soft)}
+.seg button{border-radius:2px}
+.seg button.on{box-shadow:none;border:1px solid var(--line)}
+.chips button{border-radius:3px}
+.badge{border-radius:0;border:0;border-left:3px solid var(--line);background:var(--soft);font-size:13px}
+.badge.g{border-left-color:var(--acc2);background:var(--okbg);color:var(--tx)}
+.badge.r{border-left-color:var(--neg);background:var(--negbg);color:var(--tx)}
+.stats{gap:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.stat{border:0;border-radius:0;background:none;padding:12px 14px}
+.stat+.stat{border-left:1px solid var(--line)}
+.stat.hot,.stat.cold{border-color:var(--line)}
+.stat.hot .big{color:var(--acc2)}.stat.cold .big{color:var(--neg)}
+.stat .big{font-size:clamp(22px,2.8vw,28px)}
+.stat small{font-size:12px}
+.stat small i{height:2px}
+.chart .am{fill:var(--acc2);opacity:.07}
+.formula{border-radius:0;border:0;border-left:3px solid var(--acc)}
+.flow .nd{rx:2px;stroke:var(--rule);stroke-width:1}
+.flow .nd.m{stroke:var(--acc);stroke-width:1.5}.flow .nd.f{stroke:var(--neg)}
+.flow .a3{stroke:var(--neg)}.flow .p3{fill:var(--neg)}
+.flow .t1{font-weight:600}
+.steps{gap:0;border-top:1px solid var(--line)}
+.steps div{border-radius:0;background:none;padding:12px 16px 0 0}
+.steps div+div{border-left:1px solid var(--line);padding-left:16px}
+.wk{border-radius:0;border:0;border-top:1px solid var(--rule);background:none;padding:14px 0 0}
+.weeks{gap:0 32px}
+.fbar{border-radius:0;height:8px}
+.rules{border:0;border-top:2px solid var(--rule);border-radius:0;background:none;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:40px}
+.rule{border-right:0;margin:0;padding:11px 0;border-bottom:1px solid var(--line)}
+.rule .n{color:var(--dim)}
+table.tb{width:100%;border-collapse:collapse;margin-top:24px;font-size:15px}
+.tb thead th{text-align:left;font:700 11.5px var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--dim);padding:0 16px 10px 0;border-bottom:2px solid var(--rule)}
+.tb td,.tb tbody th{padding:13px 16px 13px 0;text-align:left;font-weight:inherit;border-bottom:1px solid var(--line);vertical-align:top;color:var(--mut)}
+.tb tbody th{color:var(--tx);font-weight:650;white-space:nowrap;width:1%}
+.tb td.b{color:var(--tx);font-weight:600;width:24%}
+.deflist{margin-top:24px;border-top:2px solid var(--rule)}
+.deflist .row{display:grid;grid-template-columns:56px 220px minmax(0,1fr);gap:16px;padding:13px 0;border-bottom:1px solid var(--line)}
+.deflist .row .k{font:700 13px var(--sans);color:var(--acc)}
+.deflist .row h3{font-size:15.5px}
+.deflist .row p{color:var(--mut);font-size:15px}
+.road{display:block;margin-top:24px;border-top:2px solid var(--rule)}
+.road .card{display:grid;grid-template-columns:120px 260px minmax(0,1fr);gap:16px;border-top:0!important;border-bottom:1px solid var(--line);padding:16px 0;position:relative}
+.road .card .k{margin:0}
+.road .card h3{font-size:16px}
+.road .card p{font-size:15px}
+.qs li{padding:12px 0 12px 48px}
+.qs{border-top:2px solid var(--rule)}
+.qs li:before{color:var(--acc);font-size:12.5px}
+.author{border-radius:0;border:0;border-top:2px solid var(--rule);background:none;padding:16px 0 0}
+.author .av{border-radius:0;background:var(--acc);color:var(--btx)}
+footer{font-size:12.5px}
+
+/* ===== audit 2 ===== */
+.sw-a{background:var(--acc)}.legend i.dsh,.stat small i.dsh{-webkit-print-color-adjust:exact;print-color-adjust:exact;width:22px;height:2px;border-radius:0;background:repeating-linear-gradient(90deg,var(--acc) 0 7px,transparent 7px 11px)}.stat small i.dsh{flex:0 0 22px}.legend i.dsh.sw-n{background:repeating-linear-gradient(90deg,var(--neg) 0 4px,transparent 4px 7px)}.sw-b{background:var(--acc2)}.sw-n{background:var(--neg)}
+:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.links a:focus-visible{outline-offset:-2px}
+main:focus{outline:none}
+.skip{position:absolute;left:-9999px;top:8px;z-index:100;background:var(--acc);color:var(--btx);padding:8px 14px;font:600 14px var(--sans)}
+.skip:focus{left:12px;text-decoration:none}
+.links{scroll-padding-inline:32px}
+.links.fr{-webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 32px),transparent);mask-image:linear-gradient(90deg,#000 calc(100% - 32px),transparent)}
+.links.fl{-webkit-mask-image:linear-gradient(90deg,transparent,#000 32px);mask-image:linear-gradient(90deg,transparent,#000 32px)}
+.links.fl.fr{-webkit-mask-image:linear-gradient(90deg,transparent,#000 32px,#000 calc(100% - 32px),transparent);mask-image:linear-gradient(90deg,transparent,#000 32px,#000 calc(100% - 32px),transparent)}
+.tools{padding-left:4px}
+h3.h44{font-size:16px;font-weight:650;margin-top:40px;font-family:var(--sans)}
+.wk h4{font-size:16px;font-weight:650;margin-top:0}
+.sign{margin-top:16px;font:600 18px/1.4 var(--serif);color:var(--tx)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* ===== market simulation ===== */
+.msc{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:flex-end}
+.msc .grp{display:flex;flex-direction:column;gap:6px;min-width:0}
+.msc .grp>span{font-size:12px;color:var(--mut);font-weight:600}
+.msb{display:flex;gap:8px;flex-wrap:wrap}
+.msc .btn{padding:8px 14px;font-size:13.5px}
+.msc .seg button{flex:0 0 auto;padding:7px 12px}
+.mscb{display:flex;gap:8px 20px;flex-wrap:wrap;margin-top:14px;font-size:13.5px;color:var(--mut)}
+.mscb label{display:inline-flex;align-items:center;gap:7px;cursor:pointer}
+.mscb input{accent-color:var(--acc);width:16px;height:16px;margin:0}
+.msst{display:flex;justify-content:space-between;gap:10px;margin:20px 0 8px;font-size:13px;color:var(--mut);font-variant-numeric:tabular-nums}
+.msst #msWk{color:var(--tx);font-weight:600}
+.msbar{height:2px;background:var(--line);margin-bottom:18px}.msbar i{display:block;height:100%;background:var(--acc);width:0}
+.msg{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+.msg h4,.msrd h4{font:600 12.5px var(--sans);color:var(--mut);margin:0 0 8px;text-transform:none}
+.msg canvas{width:100%;height:220px;display:block}
+.stats.k4{grid-template-columns:repeat(4,minmax(0,1fr));margin-top:22px}
+.msrd{margin-top:22px}
+.msnow{margin:0 0 10px;font-size:15px;color:var(--tx)}
+.msrd ol{list-style:none;padding:0;margin:0;max-height:220px;overflow:auto}
+.msrd li{padding:8px 0;border-top:1px solid var(--line);font-size:13.5px;color:var(--mut)}
+.msrd li b{color:var(--tx);font-weight:600}
+html:not(.js) .msc,html:not(.js) .mscb{display:none}
+@media (max-width:900px){.msg{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:600px){.stats.k4{grid-template-columns:repeat(2,minmax(0,1fr))}.stats.k4 .stat:nth-child(3){border-left:0;padding-left:0}.stats.k4 .stat:nth-child(n+3){border-top:1px solid var(--line)}.msg canvas{height:190px}.msc{gap:12px}.msc .grp{flex:1 1 100%}.msc .seg{width:100%}.msc .seg button{flex:1}}
+@media print{.msc,.mscb,.msbar{display:none!important}.msrd ol{max-height:none;overflow:visible}.msg>div,.stats.k4,.msrd{break-inside:avoid}}
+
+@media (max-width:1100px){.brand span{display:none}}
+@media (max-width:1400px){.brand span{display:none}html[lang=es] .links{gap:16px}}
+@media (max-width:900px){.sim,.fut,.split,.two,.two.three,.weeks,.road{grid-template-columns:minmax(0,1fr)}.steps{grid-template-columns:1fr 1fr}.body{padding-left:0}.links{justify-content:flex-start}}
+@media (max-width:600px){
+ body{font-size:16px}.wrap{padding:0 16px}
+ .hero{padding-top:48px;padding-bottom:40px}
+ section.sec{padding-top:48px;padding-bottom:48px}
+ .brand span{display:none}
+ nav .wrap{gap:10px}
+ .sh{gap:12px}
+ .panel{padding:16px}
+ .sumbox{padding:22px 18px}
+ .stats{gap:6px}.stat{padding:10px}.stat small{font-size:11px;align-items:flex-start}.stat small i{margin-top:6px}
+ .sim>div:last-child{order:-1}
+ .chart .tk,.chart .tl,.chart .tf{font-size:19px}.chart .axl{display:none}
+ .flow .t1{font-size:28px}.flow .t2{font-size:20px}
+ .steps{grid-template-columns:1fr}
+ .mks{grid-template-columns:1fr}
+ .sep{display:none}
+}
+@media (max-width:900px){.sumbox ol,.rules{grid-template-columns:minmax(0,1fr)}.deflist .row,.road .card{grid-template-columns:44px minmax(0,1fr)}.deflist .row p,.road .card p{grid-column:2}.road .card{grid-template-columns:minmax(0,1fr);gap:4px}.road .card p{grid-column:auto}.steps div+div{border-left:0;padding-left:0}.steps div{border-bottom:1px solid var(--line);padding-bottom:12px}.links{gap:16px}}
+@media (max-width:600px){.tb td.b{width:auto}.tb td,.tb tbody th{display:block;padding:2px 0;border:0}.tb tr{display:block;padding:12px 0;border-bottom:1px solid var(--line)}.tb thead{display:none}.tb tbody th{white-space:normal;width:auto}.stat+.stat{padding-left:8px}.stat{padding:10px 8px 10px 0}.mks{grid-template-columns:1fr 1fr}.cards{gap:20px}.two{gap:24px}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}.js .reveal{opacity:1;transform:none}}
+@media print{
+ .skip,.sign{display:none!important}
+ .links{-webkit-mask-image:none;mask-image:none}
+ :root,[data-theme=dark]{--bg:#fff;--paper:#fff;--soft:#f3f4f6;--line:#d6dae1;--tx:#111;--mut:#333;--dim:#666;--acc:#0B5CD5;--acc2:#008545;--neg:#D60A22;--warn:#555;--warnbg:#fff;--okbg:#fff;--negbg:#fff;--grid:#e5e7eb;--rule:#111;--btx:#fff}
+ @page{size:A4;margin:16mm 14mm}
+ body{font-size:10.5pt;line-height:1.5}
+ nav,.cta,.chips,.no-print{display:none!important}
+ .print-only{display:block}
+ .reveal{opacity:1!important;transform:none!important}
+ .wrap{max-width:none;padding:0}
+ .hero{padding-top:0;padding-bottom:16px}
+ h1{font-size:26pt}
+ section.sec{padding-top:18px;padding-bottom:18px}
+ .summary{padding-top:16px;padding-bottom:16px}
+ .card,.stage,.rule,.panel,.wk,.sumbox,.author,.qs li{break-inside:avoid}
+ h2,h3,h4,.sh{break-after:avoid}
+ .flow .lit{stroke-dashoffset:0!important}.flow .pk{display:none}
+ .body{padding-left:0}
+ .sim{grid-template-columns:200px minmax(0,1fr);gap:16px}
+ .weeks,.two,.fut,.split{grid-template-columns:1fr 1fr}
+ .cards{grid-template-columns:repeat(3,1fr)}
+ .tb tr,.deflist .row,.road .card{break-inside:avoid}
+ .steps{grid-template-columns:repeat(4,1fr)}
+ .rules{grid-template-columns:1fr 1fr}
+ .blockviz{gap:3px}.split{gap:18px}
+ .sim>div:last-child{order:0}
+ a{color:var(--tx)}
+ .author a:after,footer a:after{content:" (" attr(href) ")";font-size:9pt;color:#555}
+}
+/* ===== full hd (>=1600) ===== */
+.toc,.hkey{display:none}
+@media screen and (min-width:1600px){
+:root{--max:1520px}
+nav .wrap{max-width:none;padding:0 40px}
+nav .links{display:none}
+.tools{margin-left:auto}
+main,footer{padding-left:250px}
+.toc{display:block;position:fixed;top:88px;left:40px;width:196px;max-height:calc(100vh - 112px);overflow:auto;z-index:20;font-size:13.5px;scrollbar-width:thin}
+.toc-t{font:700 11.5px var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--dim);padding-bottom:10px;border-bottom:2px solid var(--rule);margin-bottom:6px}
+.toc ol{list-style:none}
+.toc a{display:grid;grid-template-columns:24px minmax(0,1fr);gap:4px;padding:6px 0 6px 10px;color:var(--mut);border-left:2px solid transparent;line-height:1.35}
+.toc a:hover{color:var(--tx);text-decoration:none}
+.toc a.on{color:var(--tx);border-left-color:var(--acc)}
+.toc .tn{color:var(--dim);font-variant-numeric:tabular-nums}
+.toc a.on .tn{color:var(--acc)}
+.hero{display:grid;grid-template-columns:minmax(0,1fr) 460px;column-gap:72px;align-items:start}
+.hero>*{grid-column:1}
+.hero>.hkey{display:block;grid-column:2;grid-row:1/span 7;align-self:center;border-top:2px solid var(--rule);padding-top:14px}
+.hk-t{font:700 11.5px var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--dim);margin-bottom:4px}
+.hkey dl>div{display:grid;grid-template-columns:116px minmax(0,1fr);gap:16px;align-items:baseline;padding:16px 0;border-bottom:1px solid var(--line)}
+.hkey dt{font:600 30px/1.1 var(--serif);color:var(--acc);letter-spacing:-.01em;font-variant-numeric:tabular-nums}
+.hkey dd{color:var(--mut);font-size:15px}
+.hk-n{font-size:12.5px;color:var(--dim);margin-top:12px}
+h1{font-size:68px}
+.body p,.body ul.ck,.body ol.qs,.body .lead{max-width:var(--txt)}
+.body .panel p,.body .card p,.body .stage p,.body .rule p,.body .wk p,.body .stat p,.body .msrd p,.body .ph p,.body p.model,.body .row p{max-width:none}
+.sim{grid-template-columns:380px minmax(0,1fr);gap:56px}
+.msg{gap:40px}
+.msg canvas{height:320px}
+.wk canvas{height:220px}
+.stage{padding-right:12px}
+.flow>svg{display:block;max-width:1000px;margin-left:auto;margin-right:auto}
+.msrd{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);column-gap:48px;align-items:start}
+.msrd h4{grid-column:1/-1}
+.msrd .msnow{grid-column:1;max-width:var(--txt)}
+.msrd ol{grid-column:2;max-height:300px}
+}
+@media screen and (min-width:1600px) and (max-height:760px){.toc{font-size:12.5px}.toc a{padding:4px 0 4px 10px}}
+@media print{.toc,.hkey{display:none!important}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main" data-i="skip">Skip to content</a>
+<nav aria-label="Primary"><div class="wrap">
+ <a class="brand" href="#top"><em>@ManuAKoller</em><span data-i="brand">Policy note</span></a>
+ <div class="links" id="links">
+  <a href="#summary" data-i="n_sum">Summary</a><a href="#s1" data-i="n_1">Problem</a><a href="#s2" data-i="n_2">Proposal</a><a href="#s4" data-i="n_4">Pricing</a><a href="#s6" data-i="n_6">Futures</a><a href="#msim" data-i="n_ms">Simulation</a><a href="#s7" data-i="n_7">Safeguards</a><a href="#s10" data-i="n_10">Roadmap</a><a href="#s11" data-i="n_11">Questions</a>
+ </div>
+ <div class="tools">
+  <div class="lang" role="group" data-i-aria="a_lang" aria-label="Language"><button type="button" data-l="en" lang="en" aria-label="English">EN</button><button type="button" data-l="es" lang="es" aria-label="Español">ES</button></div>
+  <button type="button" class="ib" id="theme" aria-label="Switch to light mode"><svg aria-hidden="true" focusable="false" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+ </div>
+ <div class="prog" id="prog"></div>
+</div></nav>
+
+<nav class="toc" id="toc" aria-label="Contents" data-i-aria="toc_a">
+ <div class="toc-t" data-i="toc_t">Contents</div>
+ <ol><li><a href="#summary"><span class="tn" aria-hidden="true">·</span><span data-i="n_sum">Summary</span></a></li><li><a href="#s1"><span class="tn" aria-hidden="true">1</span><span data-i="s1_t">The problem</span></a></li><li><a href="#s2"><span class="tn" aria-hidden="true">2</span><span data-i="s2_t">The proposal in three stages</span></a></li><li><a href="#s3"><span class="tn" aria-hidden="true">3</span><span data-i="s3_t">Standard usage blocks</span></a></li><li><a href="#s4"><span class="tn" aria-hidden="true">4</span><span data-i="s4_t">Pricing mechanism</span></a></li><li><a href="#s5"><span class="tn" aria-hidden="true">5</span><span data-i="s5_t">Market flow</span></a></li><li><a href="#s6"><span class="tn" aria-hidden="true">6</span><span data-i="s6_t">Futures (Stage 3)</span></a></li><li><a href="#msim"><span class="tn" aria-hidden="true">7</span><span data-i="ms_t">12-month market simulation</span></a></li><li><a href="#s7"><span class="tn" aria-hidden="true">8</span><span data-i="s7_t">Anti-abuse safeguards</span></a></li><li><a href="#s8"><span class="tn" aria-hidden="true">9</span><span data-i="s8_t">Benefits by participant</span></a></li><li><a href="#s9"><span class="tn" aria-hidden="true">10</span><span data-i="s9_t">Open risks</span></a></li><li><a href="#s10"><span class="tn" aria-hidden="true">11</span><span data-i="s10_t">Implementation roadmap</span></a></li><li><a href="#s11"><span class="tn" aria-hidden="true">12</span><span data-i="s11_t">Open questions for xAI</span></a></li></ol>
+</nav>
+<main id="main" tabindex="-1">
+<header class="hero wrap" id="top">
+ <div class="eyebrow" data-i="eyebrow">Product policy proposal · October 2026</div>
+ <h1 data-i="h1">A Secondary Market for Unused AI Usage</h1>
+ <p class="sub" data-i="sub">A three-stage proposal for Grok subscriptions: credit already-paid usage when a subscriber upgrades, allow unused usage blocks to be resold inside the platform under transparent, rule-based pricing, and later offer futures on those blocks.</p>
+ <div class="byline">
+  <span class="who"><span class="av">MK</span>Manuel A. Koller — <a href="https://x.com/ManuAKoller" target="_blank" rel="noopener">@ManuAKoller<span class="sr" data-i="newtab"> (opens in a new tab)</span></a></span>
+  <span class="sep"></span><span data-i="date">October 2026</span>
+  <span class="sep"></span><span data-i="read">8 min read</span>
+ </div>
+ <div class="cta">
+  <button type="button" class="btn p" id="pdf"><svg aria-hidden="true" focusable="false" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"/></svg><span data-i="b_pdf">Download as PDF</span></button>
+  <a class="btn" href="#s4" data-i="b_sim">Open the price simulator</a>
+ </div>
+ <p class="disc" data-i="disc">Independent proposal by a Grok user. Not affiliated with xAI.</p>
+ <aside class="hkey" aria-labelledby="hkT"><div class="hk-t" id="hkT" data-i="hk_t">At a glance</div><dl><div><dt data-i="hk1n">3</dt><dd data-i="hk1">stages: upgrade credit, block market, futures</dd></div><div><dt data-i="hk2n">80/20</dt><dd data-i="hk2">of blocks offered: sold at the xAI price / traded freely</dd></div><div><dt data-i="hk3n">Floor</dt><dd data-i="hk3">on the freely traded 20%, with no ceiling</dd></div><div><dt data-i="hk4n">0</dt><dd data-i="hk4">external resale: everything stays inside the platform</dd></div></dl><p class="hk-n" data-i="hk_n">Rule values shown on this page are illustrative.</p></aside>
+</header>
+
+<section class="summary wrap" id="summary"><div class="sumbox reveal">
+ <h2 data-i="sum_t">Executive summary</h2>
+ <ol><li data-i="sum1"><b>Problem.</b> Subscription usage that is paid for but not consumed expires without value, and upgrading mid-cycle does not account for what was already paid.</li><li data-i="sum2"><b>Stage 1.</b> Credit the unused, already-paid portion of the current plan toward an upgrade. Low complexity, immediate fairness gain.</li><li data-i="sum3"><b>Stage 2.</b> Pilot an in-platform market for standard usage blocks under an 80/20 rule: 80% of the blocks offered are sold at a fixed xAI price that declines toward expiry but never below the plan floor, and 20% trade freely at a market price with a floor and no ceiling. xAI charges a fee per block sold (example value: 4 points of list price).</li><li data-i="sum3f"><b>Stage 3.</b> Once the market has stable data, offer futures: blocks bought in advance, at a discount, for activation on a future date.</li><li data-i="sum4"><b>Outcome.</b> Lower effective cost for light users, cheaper burst capacity for heavy users, and new transaction revenue and retention for the platform, without external resale.</li></ol>
+</div></section>
+
+<section class="sec wrap" id="s1">
+ <div class="sh"><span class="sn">1</span><h2 data-i="s1_t">The problem</h2></div>
+ <div class="body reveal">
+  <p class="lead" data-i="s1_l">AI subscriptions are sold as fixed periods of capacity, while real usage is irregular. The gap between what is paid for and what is used is currently lost.</p>
+  <div class="cards">
+   <div class="card"><div class="k" data-i="s1_k1">Waste</div><h3 data-i="s1_h1">Unused capacity expires</h3><p data-i="s1_p1">Usage that is not consumed within the period disappears. The subscriber pays for it and nobody benefits from it.</p></div>
+   <div class="card"><div class="k" data-i="s1_k2">Upgrades</div><h3 data-i="s1_h2">Paid usage is not credited</h3><p data-i="s1_p2">Moving to a higher tier mid-cycle does not reflect the unused, already-paid portion of the current plan.</p></div>
+   <div class="card"><div class="k" data-i="s1_k3">Mismatch</div><h3 data-i="s1_h3">Demand is uneven</h3><p data-i="s1_p3">Some subscribers hit their limits while others leave capacity idle. There is no mechanism to reallocate it.</p></div>
+  </div>
+ </div>
+</section>
+
+<section class="sec wrap" id="s2">
+ <div class="sh"><span class="sn">2</span><h2 data-i="s2_t">The proposal in three stages</h2></div>
+ <div class="body reveal">
+  <p class="lead" data-i="s2_l">The proposal is deliberately incremental. Stage 1 is a policy change; Stage 2 introduces a market only after Stage 1 is in place; Stage 3 adds futures once the market has stable data.</p>
+  <div class="two three">
+   <div class="stage"><div class="num" data-i="s2_n1">Stage 1</div><h3 data-i="s2_h1">Upgrade credit</h3><p data-i="s2_p1">When a subscriber upgrades, the unused, already-paid portion of the current plan is credited toward the new plan. No new infrastructure beyond billing logic.</p><span class="tag" data-i="s2_g1">Policy change</span></div>
+   <div class="stage"><div class="num" data-i="s2_n2">Stage 2</div><h3 data-i="s2_h2">Usage block market</h3><p data-i="s2_p2">Subscribers can list unused usage as standard blocks. Most blocks are sold at a fixed xAI price; a share trades freely at market price. The platform sets the rules, the floor and the fee per block sold.</p><span class="tag" data-i="s2_g2">Controlled pilot</span></div>
+   <div class="stage"><div class="num" data-i="s2_n3">Stage 3</div><h3 data-i="s2_h3">Futures</h3><p data-i="s2_p3">Subscribers can buy blocks in advance, at a discount, for activation on a future date. Introduced only after the block market has stable data (section 6).</p><span class="tag" data-i="s2_g3">Later extension</span></div>
+  </div>
+ </div>
+</section>
+
+<section class="sec wrap" id="s3">
+ <div class="sh"><span class="sn">3</span><h2 data-i="s3_t">Standard usage blocks</h2></div>
+ <div class="body">
+  <div class="split reveal">
+   <div><p class="lead" data-i="s3_l">To make usage tradable, it is packaged into standard, fungible blocks. Each block has a fixed size, a tier and an expiry date.</p>
+    <ul class="ck"><li data-i="s3_b1">Blocks are defined by the platform, not by users, so every block of the same tier is interchangeable.</li><li data-i="s3_b2">Blocks stay within their tier: Plus blocks trade in the Plus market, Ultra blocks in the Ultra market.</li><li data-i="s3_b3">Each block carries its own expiry, which drives its price as it approaches.</li></ul></div>
+   <div class="card">
+    <div class="bvcap" data-i="s3_cap">Illustrative period divided into 30 standard blocks</div>
+    <div class="blockviz" id="blockviz" aria-hidden="true"></div>
+    <div class="mks">
+     <div class="mk"><b data-i="s3_m1">Plus market</b><small data-i="s3_m1s">Plus blocks, Plus buyers</small></div>
+     <div class="mk"><b data-i="s3_m2">Ultra market</b><small data-i="s3_m2s">Ultra blocks, Ultra buyers</small></div>
+    </div>
+   </div>
+  </div>
+ </div>
+</section>
+
+<section class="sec wrap" id="s4">
+ <div class="sh"><span class="sn">4</span><h2 data-i="s4_t">Pricing mechanism</h2></div>
+ <div class="body">
+  <p class="lead reveal" data-i="s4_l">Prices follow a transparent 80/20 rule. 80% of the blocks offered are sold at a fixed xAI price that declines as expiry approaches, never below the plan floor. The remaining 20% trade freely at a market price driven by demand, protected by a floor and with no ceiling.</p>
+  <div class="panel reveal" id="sim">
+   <div class="ph"><h3 data-i="sim_t">Price simulator</h3><span class="illus" data-i="illus">Illustrative example values; real values would be set by xAI.</span></div>
+   <div class="sim">
+    <div class="ctrl">
+     <div class="lbl" id="lblPlan" data-i="c_plan">Plan market</div>
+     <div class="seg" id="planSeg" role="group" aria-labelledby="lblPlan"><button type="button" data-v="plus" class="on" aria-pressed="true">Plus</button><button type="button" data-v="ultra" aria-pressed="false">Ultra</button></div>
+     <label for="days"><span data-i="c_days">Days remaining on the block</span><span class="out" id="oDays"></span></label>
+     <input type="range" id="days" min="0" max="7" step="0.25" value="5" data-i-aria="c_days">
+     <label for="dem"><span data-i="c_dem">Market demand</span><span class="out" id="oDem"></span></label>
+     <input type="range" id="dem" min="0.3" max="1.6" step="0.05" value="1" data-i-aria="c_dem">
+     <div class="chips"><button type="button" data-d="0.5" data-i="ch_lo">Low</button><button type="button" data-d="1" data-i="ch_md">Medium</button><button type="button" data-d="1.45" data-i="ch_hi">High</button></div>
+     <div class="badge" id="badge" aria-live="polite"></div>
+    </div>
+    <div>
+     <div class="stats">
+      <div class="stat"><small><i class="sw-a dsh"></i><span data-i="st_x">xAI price (80% of blocks)</span></small><div class="big" id="vX"></div><div class="u" data-i="st_u">% of list price</div></div>
+      <div class="stat" id="stM"><small><i class="sw-b"></i><span data-i="st_m">Market price (20% of blocks)</span></small><div class="big" id="vM"></div><div class="u" data-i="st_u">% of list price</div></div>
+      <div class="stat"><small><i class="sw-n"></i><span data-i="st_f">Floor</span></small><div class="big" id="vF"></div><div class="u" data-i="st_u">% of list price</div></div>
+     </div>
+     <svg class="chart" id="chart" viewBox="0 0 620 300" role="img" data-i-aria="ch_aria"></svg>
+     <div class="legend"><span><i class="sw-a dsh"></i><span data-i="lg_x">xAI price (80% of blocks)</span></span><span><i class="sw-b"></i><span data-i="lg_m">Market price (20% of blocks)</span></span><span><i class="sw-n dsh"></i><span data-i="lg_f">Floor</span></span></div>
+     <div class="model" data-i="model">Model: xAI price = max(floor, 100 × (1 − 0.5 × (7 − d) / 6)), applies to 80% of blocks; market price = max(floor, xAI price × demand), applies to 20% of blocks. Floor: Plus 40%, Ultra 45%. xAI charges a fee per block sold (example value: 4 points of list price).</div>
+    </div>
+   </div>
+  </div>
+  <div class="deflist reveal">
+   <div class="row"><span class="k">4.1</span><h3 data-i="s4_h1">80/20 rule</h3><p data-i="s4_p1">Of the blocks offered, 80% are sold at the fixed xAI price and 20% trade freely at market price. This keeps prices predictable while letting demand signal real value. xAI charges a fee per block sold, for example 4 points of list price.</p></div>
+   <div class="row"><span class="k">4.2</span><h3 data-i="s4_h2">Floor, no ceiling</h3><p data-i="s4_p2">A minimum price per tier prevents dumping. There is no upper limit, so scarce capacity can reach its real value.</p></div>
+   <div class="row"><span class="k">4.3</span><h3 data-i="s4_h3">Time decay</h3><p data-i="s4_p3">The xAI price declines as expiry approaches, but never below the plan floor, which encourages early listing and steady supply.</p></div>
+  </div>
+  <h3 class="h44 reveal" data-i="s44_t">4.4 Simultaneous versus staggered expiry</h3>
+  <p class="lead reveal" data-i="s44_l">If every block expires on the same day, supply arrives all at once and prices collapse to the floor. Staggering expiry across the period smooths supply.</p>
+  <div class="weeks reveal" id="weeks">
+   <div class="wk"><h4 data-i="wk1_t">Simultaneous expiry</h4><canvas id="cvSame" role="img" data-i-aria="wk1_p"></canvas><p data-i="wk1_p">All blocks reach expiry on day 7: a single supply spike and prices at the floor.</p></div>
+   <div class="wk"><h4 data-i="wk2_t">Staggered expiry</h4><canvas id="cvStag" role="img" data-i-aria="wk2_p"></canvas><p data-i="wk2_p">Blocks expire on different days: supply is spread evenly and prices stay stable.</p></div>
+  </div>
+ </div>
+</section>
+
+<section class="sec wrap" id="s5">
+ <div class="sh"><span class="sn">5</span><h2 data-i="s5_t">Market flow</h2></div>
+ <div class="body">
+  <p class="lead reveal" data-i="s5_l">All transactions happen inside the platform. No usage leaves the ecosystem and no external payment rails are involved.</p>
+  <div class="panel flow reveal" id="flow">
+   <svg viewBox="0 0 900 392" role="img" data-i-aria="f_aria">
+    <path class="ln" d="M190 110 L355 110"/><path class="ln" d="M545 110 L710 110"/><path class="ln" d="M450 160 L450 250"/><path class="ln" d="M710 150 C640 410 260 410 190 150"/>
+    <path class="lit a1" d="M190 110 L355 110"/><path class="lit a2" d="M545 110 L710 110"/><path class="lit a3" d="M450 160 L450 250"/><path class="lit a4" d="M710 150 C640 410 260 410 190 150"/>
+    <path class="pk p1" d="M347 104 L357 110 L347 116Z"/><path class="pk p1" d="M702 104 L712 110 L702 116Z"/><path class="pk p3" d="M444 242 L450 252 L456 242Z"/><path class="pk p4" d="M186 160 L190 149 L197 159Z"/>
+    <rect class="nd" x="20" y="60" width="170" height="100" rx="12"/><text class="t1" x="105" y="105" text-anchor="middle" data-i="f_sel">Seller</text><text class="t2" x="105" y="130" text-anchor="middle" data-i="f_sels">lists unused blocks</text>
+    <rect class="nd m" x="355" y="60" width="190" height="100" rx="12"/><text class="t1" x="450" y="105" text-anchor="middle" data-i="f_mk">Market</text><text class="t2" x="450" y="130" text-anchor="middle" data-i="f_mks">inside the platform</text>
+    <rect class="nd" x="710" y="60" width="170" height="100" rx="12"/><text class="t1" x="795" y="105" text-anchor="middle" data-i="f_buy">Buyer</text><text class="t2" x="795" y="130" text-anchor="middle" data-i="f_buys">same plan tier</text>
+    <rect class="nd f" x="355" y="250" width="190" height="64" rx="12"/><text class="t1" x="450" y="279" text-anchor="middle" data-i="f_fee">Platform fee</text><text class="t2" x="450" y="301" text-anchor="middle" data-i="f_fees">charged per block sold</text>
+    <text class="t2" x="450" y="380" text-anchor="middle" data-i="f_cr">sale proceeds credited to the seller's balance</text>
+   </svg>
+   <div class="steps"><div><b data-i="fs1t">1. List</b><span data-i="fs1">The seller lists one or more unused blocks.</span></div><div><b data-i="fs2t">2. Price</b><span data-i="fs2">The rule sets the price from time to expiry and demand.</span></div><div><b data-i="fs3t">3. Match</b><span data-i="fs3">A buyer on the same tier acquires the block.</span></div><div><b data-i="fs4t">4. Settle</b><span data-i="fs4">Usage moves to the buyer; credit goes to the seller.</span></div></div>
+  </div>
+ </div>
+</section>
+
+<section class="sec wrap" id="s6">
+ <div class="sh"><span class="sn">6</span><h2 data-i="s6_t">Futures (Stage 3)</h2></div>
+ <div class="body">
+  <p class="lead reveal" data-i="s6_l">Once the spot market is stable, subscribers could buy blocks that activate in a future week at a discount, giving the platform predictable demand.</p>
+  <div class="panel reveal">
+   <div class="ph"><h3 data-i="fu_t">Futures calculator</h3><span class="illus" data-i="illus">Illustrative example values; real values would be set by xAI.</span></div>
+   <div class="fut">
+    <div class="ctrl">
+     <div class="formula" data-i="fu_f">Future = List × (1 − annual rate × weeks / 52)</div>
+     <label for="wks"><span data-i="fu_w">Weeks until activation</span><span class="out" id="oW"></span></label>
+     <input type="range" id="wks" min="1" max="52" step="1" value="12" data-i-aria="fu_w">
+     <label for="rate"><span data-i="fu_r">Annual discount rate</span><span class="out" id="oR"></span></label>
+     <input type="range" id="rate" min="0" max="0.8" step="0.01" value="0.3" data-i-aria="fu_r">
+    </div>
+    <div>
+     <small class="bvcap" data-i="fu_out">Future price</small>
+     <div class="fbig" id="vFut"></div>
+     <div class="fbar"><i id="fBar"></i><u id="fFloor"></u></div>
+     <div class="fscale"><span>0</span><span data-i="fu_fl">Floor 40%</span><span data-i="fu_list">List 100%</span></div>
+     <p class="note" id="fNote" aria-live="polite"></p>
+    </div>
+   </div>
+  </div>
+ </div>
+</section>
+
+<section class="sec wrap" id="msim">
+ <div class="sh"><span class="sn">7</span><h2 data-i="ms_t">12-month market simulation</h2></div>
+ <div class="body">
+  <p class="lead reveal" data-i="ms_l">A self-running illustration of how the 80/20 rule could behave over a year, week by week, in separate Plus and Ultra markets. Each week subscribers offer a similar number of unused blocks with staggered expiry dates. 80% sell at the xAI price, which declines toward expiry but never below the plan floor, and 20% trade freely above that floor, with no ceiling. Blocks that do not sell expire.</p>
+  <div class="panel" id="msPanel">
+   <div class="ph"><h3 data-i="ms_h">Simulated run</h3><span class="illus" data-i="ms_il">Example data. Illustrative simulation, not real xAI data.</span></div>
+   <div class="msc">
+    <div class="grp"><span id="msLblRun" data-i="ms_ctl">Run</span><div class="msb">
+     <button type="button" class="btn p" id="msPlay"><svg aria-hidden="true" focusable="false" width="12" height="12" viewBox="0 0 12 12"><path id="msIco" d="M2 1l9 5-9 5z" fill="currentColor"/></svg><span id="msPlayT" data-i="ms_play">Play</span></button>
+     <button type="button" class="btn" id="msReset" data-i="ms_reset">Reset</button>
+     <button type="button" class="btn" id="msNew" data-i="ms_new">New run</button>
+    </div></div>
+    <div class="grp"><span id="msLblSpd" data-i="ms_spd">Speed</span><div class="seg" id="msSpd" role="group" aria-labelledby="msLblSpd"><button type="button" data-v="1" class="on" aria-pressed="true">1x</button><button type="button" data-v="2" aria-pressed="false">2x</button><button type="button" data-v="4" aria-pressed="false">4x</button></div></div>
+    <div class="grp"><span id="msLblPlan" data-i="ms_plan">Market</span><div class="seg" id="msPlan" role="group" aria-labelledby="msLblPlan"><button type="button" data-v="plus" class="on" aria-pressed="true">Plus</button><button type="button" data-v="ultra" aria-pressed="false">Ultra</button></div></div>
+    <div class="grp"><span id="msLblTr" data-i="ms_tr">Demand trend</span><div class="seg" id="msTr" role="group" aria-labelledby="msLblTr"><button type="button" data-v="low" aria-pressed="false" data-i="tr_low">Low</button><button type="button" data-v="mid" class="on" aria-pressed="true" data-i="tr_mid">Medium</button><button type="button" data-v="high" aria-pressed="false" data-i="tr_high">High</button></div></div>
+   </div>
+   <div class="mscb"><label><input type="checkbox" id="msEv" checked><span data-i="ms_ev">Launch spike (weeks 21–26)</span></label><label><input type="checkbox" id="msFu"><span data-i="ms_fu">Futures (Stage 3)</span></label></div>
+   <div class="msst"><span id="msWk"></span><span id="msSeed"></span></div>
+   <div class="msbar" aria-hidden="true"><i id="msBar"></i></div>
+   <div class="msg">
+    <div><h4 data-i="ms_c1">Average price per block sold, % of list price</h4><canvas id="msCvP" role="img"></canvas>
+     <div class="legend"><span><i class="sw-a dsh"></i><span data-i="ms_lx">xAI price (80% of blocks)</span></span><span><i class="sw-b"></i><span data-i="ms_lm">Market price (20% of blocks)</span></span><span><i class="sw-n dsh"></i><span data-i="ms_lf">Floor</span></span></div></div>
+    <div><h4 data-i="ms_c2">Blocks per week, index (100 = average Plus supply)</h4><canvas id="msCvB" role="img"></canvas>
+     <div class="legend"><span><i class="sw-a"></i><span data-i="ms_bs">Sold</span></span><span><i class="sw-n"></i><span data-i="ms_be">Expired</span></span></div></div>
+   </div>
+   <div class="stats k4">
+    <div class="stat"><small data-i="k1">Recovered by sellers</small><div class="big" id="msK1">—</div><div class="u" data-i="k1u">% of the list value of blocks offered</div></div>
+    <div class="stat"><small data-i="k2">Buyer savings</small><div class="big" id="msK2">—</div><div class="u" data-i="k2u">% below list price, on average</div></div>
+    <div class="stat"><small data-i="k3">xAI fees</small><div class="big" id="msK3">—</div><div class="u" data-i="k3u">% of traded volume</div></div>
+    <div class="stat"><small data-i="k4">Blocks sold</small><div class="big" id="msK4">—</div><div class="u" data-i="k4u">% of blocks offered</div></div>
+   </div>
+   <div class="msrd"><h4 data-i="ms_rd">Monthly reading</h4><p class="msnow" id="msNow" aria-live="polite" data-i="ms_rd0">A short reading appears at the end of each simulated month.</p><ol id="msLog" tabindex="0" data-i-aria="ms_rd"></ol></div>
+   <p class="model" data-i="ms_as">Example assumptions, values xAI would set: weekly supply varies by up to 8%; demand varies by up to 22%, with mild seasonality and the selected trend; buyers take the cheapest blocks first and fewer buy above list price; the xAI fee is 4 points of list price per block sold (example value); floors are Plus 40% and Ultra 45%; Ultra supply is smaller than Plus; with futures on, 10% of supply is sold four weeks ahead.</p>
+  </div>
+ </div>
+</section>
+
+<section class="sec wrap" id="s7">
+ <div class="sh"><span class="sn">8</span><h2 data-i="s7_t">Anti-abuse safeguards</h2></div>
+ <div class="body"><p class="lead reveal" data-i="s7_l">A market for usage only works if it cannot be used for arbitrage, laundering or automated farming. The following rules would apply from the pilot onward.</p><div class="rules reveal" id="rules"><div class="rule"><span class="n">8.1</span><p>Only paid subscribers can list or buy blocks.</p></div><div class="rule"><span class="n">8.2</span><p>Blocks trade only within the same tier.</p></div><div class="rule"><span class="n">8.3</span><p>Sellers receive platform credit, not cash.</p></div><div class="rule"><span class="n">8.4</span><p>Credit cannot be withdrawn or transferred outside the platform.</p></div><div class="rule"><span class="n">8.5</span><p>Accounts must be in good standing for a minimum period before listing.</p></div><div class="rule"><span class="n">8.6</span><p>Listing limits per account and per period.</p></div><div class="rule"><span class="n">8.7</span><p>Purchase limits per account and per period.</p></div><div class="rule"><span class="n">8.8</span><p>Purchased blocks cannot be resold.</p></div><div class="rule"><span class="n">8.9</span><p>The xAI price is set by rule, and the market price cannot fall below the floor of its tier.</p></div><div class="rule"><span class="n">8.10</span><p>Identity and payment-method checks to detect multi-accounting.</p></div><div class="rule"><span class="n">8.11</span><p>Automated monitoring for unusual trading patterns.</p></div><div class="rule"><span class="n">8.12</span><p>The platform can suspend the market or adjust parameters at any time.</p></div></div></div>
+</section>
+
+<section class="sec wrap" id="s8">
+ <div class="sh"><span class="sn">9</span><h2 data-i="s8_t">Benefits by participant</h2></div>
+ <div class="body"><table class="tb reveal"><thead><tr><th scope="col" data-i="th_part">Participant</th><th scope="col" data-i="th_ben">Benefit</th><th scope="col" data-i="th_det">Detail</th></tr></thead><tbody><tr><th scope="row" data-i="s8_k1">Light users</th><td class="b" data-i="s8_h1">Lower effective cost</td><td data-i="s8_p1">Recover part of the value of usage they would otherwise lose.</td></tr><tr><th scope="row" data-i="s8_k2">Heavy users</th><td class="b" data-i="s8_h2">Cheaper extra capacity</td><td data-i="s8_p2">Access additional usage without moving to a higher tier.</td></tr><tr><th scope="row" data-i="s8_k3">Platform</th><td class="b" data-i="s8_h3">Revenue and retention</td><td data-i="s8_p3">Fee revenue on each block sold, potentially fewer cancellations and better data on real demand.</td></tr></tbody></table></div>
+</section>
+
+<section class="sec wrap" id="s9">
+ <div class="sh"><span class="sn">10</span><h2 data-i="s9_t">Open risks</h2></div>
+ <div class="body"><table class="tb reveal"><thead><tr><th scope="col" data-i="th_risk">Risk</th><th scope="col" data-i="th_desc">Description and mitigation</th></tr></thead><tbody><tr><th scope="row" data-i="s9_h1">Cannibalization</th><td data-i="s9_p1">Some upgrades could be replaced by block purchases. Tier boundaries and limits mitigate this.</td></tr><tr><th scope="row" data-i="s9_h2">Compute planning</th><td data-i="s9_p2">Resold usage is consumed rather than expiring, which increases realized load.</td></tr><tr><th scope="row" data-i="s9_h3">Regulatory treatment</th><td data-i="s9_p3">Credits and resale may have accounting, tax or consumer-law implications by jurisdiction.</td></tr><tr><th scope="row" data-i="s9_h4">Complexity</th><td data-i="s9_p4">A market adds product surface. A limited pilot keeps it contained.</td></tr></tbody></table></div>
+</section>
+
+<section class="sec wrap" id="s10">
+ <div class="sh"><span class="sn">11</span><h2 data-i="s10_t">Implementation roadmap</h2></div>
+ <div class="body"><p class="lead reveal" data-i="s10_l">Each stage is independent and can be evaluated before moving to the next.</p><div class="road reveal">
+  <div class="card"><div class="k" data-i="r1_k">Stage 1</div><h3 data-i="r1_h">Basic fix: upgrade credit</h3><p data-i="r1_p">Credit the unused, already-paid portion of the plan on upgrade. Billing change only.</p></div>
+  <div class="card"><div class="k" data-i="r2_k">Stage 2</div><h3 data-i="r2_h">Block market pilot</h3><p data-i="r2_p">Standard blocks, an 80/20 rule (80% at the xAI price, 20% at market price with a floor), a fee per block sold (example value: 4 points of list price) and safeguards, for a limited group of subscribers.</p></div>
+  <div class="card"><div class="k" data-i="r3_k">Stage 3</div><h3 data-i="r3_h">Futures</h3><p data-i="r3_p">Discounted blocks for future activation, once the spot market has stable data.</p></div>
+ </div></div>
+</section>
+
+<section class="sec wrap" id="s11">
+ <div class="sh"><span class="sn">12</span><h2 data-i="s11_t">Open questions for xAI</h2></div>
+ <div class="body"><ol class="qs reveal" id="qs"><li>Is crediting unused, paid usage on upgrade technically feasible in the current billing system?</li><li>What block size and expiry window best match actual usage patterns?</li><li>What floor and fee levels would protect both sellers and platform revenue?</li><li>Should credit be usable only for usage, or also for subscription renewals?</li><li>Which jurisdictions would require specific review before a pilot?</li><li>What metrics would define a successful pilot?</li></ol></div>
+</section>
+
+<section class="closing wrap" id="close">
+ <h2 data-i="cl_t">Open to discussion</h2>
+ <p class="lead" data-i="cl_l">This document is a starting point. Feedback from the Grok team and from other subscribers is welcome.</p>
+ <p class="sign" data-i="cl_s">Grok team, happy to discuss. — @ManuAKoller</p>
+ <div class="author">
+  <span class="av">MK</span>
+  <div><b>Manuel A. Koller — <a href="https://x.com/ManuAKoller" target="_blank" rel="noopener">@ManuAKoller<span class="sr" data-i="newtab"> (opens in a new tab)</span></a></b><small data-i="cl_a">Author · October 2026 · Independent proposal by a Grok user. Not affiliated with xAI.</small></div>
+ </div>
+ <div class="cta"><a class="btn p" href="https://x.com/ManuAKoller" target="_blank" rel="noopener" data-i="cl_b">Contact on X</a><button type="button" class="btn" id="pdf2" data-i="b_pdf">Download as PDF</button></div>
+</section>
+</main>
+
+<footer><div class="wrap">
+ <p data-i="disc">Independent proposal by a Grok user. Not affiliated with xAI.</p>
+ <p data-i="ft2">All figures are illustrative example values; real values would be set by xAI. Not legal or financial advice.</p>
+ <p class="print-only" data-i="ft3">This PDF is a static export of the three-stage proposal. The interactive version includes the price simulator, the futures calculator and the market simulation.</p>
+</div></footer>
+<script>
+const I18N={en:{
+toc_a:"Contents",toc_t:"Contents",hk_t:"At a glance",hk1n:"3",hk1:"stages: upgrade credit, block market, futures",hk2n:"80/20",hk2:"of blocks offered: sold at the xAI price / traded freely",hk3n:"Floor",hk3:"on the freely traded 20%, with no ceiling",hk4n:"0",hk4:"external resale: everything stays inside the platform",hk_n:"Rule values shown on this page are illustrative.",
+skip:"Skip to content",newtab:" (opens in a new tab)",a_toL:"Switch to light mode",a_toD:"Switch to dark mode",f_aria:"Market flow diagram: the seller lists unused blocks on the market inside the platform, a buyer on the same tier acquires them, xAI charges a fee per block sold and the sale proceeds are credited to the seller's balance.",cl_s:"Grok team, happy to discuss. — @ManuAKoller",fu_n1:"Discount of {n}% for activation in 1 week.",n_ms:"Simulation",ms_t:"12-month market simulation",ms_l:"A self-running illustration of how the 80/20 rule could behave over a year, week by week, in separate Plus and Ultra markets. Each week subscribers offer a similar number of unused blocks with staggered expiry dates. 80% sell at the xAI price, which declines toward expiry but never below the plan floor, and 20% trade freely above that floor, with no ceiling. Blocks that do not sell expire.",ms_h:"Simulated run",ms_il:"Example data. Illustrative simulation, not real xAI data.",ms_ctl:"Run",ms_play:"Play",ms_pause:"Pause",ms_reset:"Reset",ms_new:"New run",ms_spd:"Speed",ms_plan:"Market",ms_tr:"Demand trend",tr_low:"Low",tr_mid:"Medium",tr_high:"High",ms_ev:"Launch spike (weeks 21–26)",ms_fu:"Futures (Stage 3)",ms_wk:"Week {w} of 52 · month {m}",ms_seed:"Run no. {s}",ms_c1:"Average price per block sold, % of list price",ms_lx:"xAI price (80% of blocks)",ms_lm:"Market price (20% of blocks)",ms_lf:"Floor",ms_c2:"Blocks per week, index (100 = average Plus supply)",ms_bs:"Sold",ms_be:"Expired",k1:"Recovered by sellers",k1u:"% of the list value of blocks offered",k2:"Buyer savings",k2u:"% below list price, on average",k3:"xAI fees",k3u:"% of traded volume",k4:"Blocks sold",k4u:"% of blocks offered",ms_rd:"Monthly reading",ms_rd0:"A short reading appears at the end of each simulated month.",ms_a1:"Price chart, {p}, week {w}: xAI price {x}, market price {m}, floor {f}, all as a share of list price.",ms_a0:"Price chart, {p}: the run has not started.",ms_a2:"Blocks chart, {p}, week {w}: {s} of blocks offered sold and {e} expired.",ms_b0:"Blocks chart, {p}: the run has not started.",rd_m:"Month {m}",r_hi:"Demand ran above supply",r_lo:"Demand ran below supply",r_eq:"Demand was close to supply",r_se:" ({s} of blocks offered sold, {e} expired).",r_pm:" The market price averaged {pm} of list, {c} the xAI price ({px}).",c_up:"above",c_dn:"below",c_eq:"close to",x_ev:" The launch spike pushed the market price up.",x_fl:" For part of the month the market price sat at the floor.",x_cap:" Free trading cleared above list price, since there is no ceiling.",x_fu:" Futures pre-sold part of the supply.",ms_as:"Example assumptions, values xAI would set: weekly supply varies by up to 8%; demand varies by up to 22%, with mild seasonality and the selected trend; buyers take the cheapest blocks first and fewer buy above list price; the xAI fee is 4 points of list price per block sold (example value); floors are Plus 40% and Ultra 45%; Ultra supply is smaller than Plus; with futures on, 10% of supply is sold four weeks ahead.",brand:"Policy note",th_part:"Participant",th_ben:"Benefit",th_det:"Detail",th_risk:"Risk",th_desc:"Description and mitigation",n_sum:"Summary",n_1:"Problem",n_2:"Proposal",n_4:"Pricing",n_6:"Futures",n_7:"Safeguards",n_10:"Roadmap",n_11:"Questions",
+a_lang:"Language",
+eyebrow:"Product policy proposal · October 2026",
+h1:"A Secondary Market for Unused AI Usage",
+sub:"A three-stage proposal for Grok subscriptions: credit already-paid usage when a subscriber upgrades, allow unused usage blocks to be resold inside the platform under transparent, rule-based pricing, and later offer futures on those blocks.",
+date:"October 2026",read:"8 min read",b_pdf:"Download as PDF",b_sim:"Open the price simulator",
+disc:"Independent proposal by a Grok user. Not affiliated with xAI.",
+sum_t:"Executive summary",
+sum1:"<b>Problem.</b> Subscription usage that is paid for but not consumed expires without value, and upgrading mid-cycle does not account for what was already paid.",
+sum2:"<b>Stage 1.</b> Credit the unused, already-paid portion of the current plan toward an upgrade. Low complexity, immediate fairness gain.",
+sum3:"<b>Stage 2.</b> Pilot an in-platform market for standard usage blocks under an 80/20 rule: 80% of the blocks offered are sold at a fixed xAI price that declines toward expiry but never below the plan floor, and 20% trade freely at a market price with a floor and no ceiling. xAI charges a fee per block sold (example value: 4 points of list price).",
+sum3f:"<b>Stage 3.</b> Once the market has stable data, offer futures: blocks bought in advance, at a discount, for activation on a future date.",
+sum4:"<b>Outcome.</b> Lower effective cost for light users, cheaper burst capacity for heavy users, and new transaction revenue and retention for the platform, without external resale.",
+s1_t:"The problem",
+s1_l:"AI subscriptions are sold as fixed periods of capacity, while real usage is irregular. The gap between what is paid for and what is used is currently lost.",
+s1_k1:"Waste",s1_h1:"Unused capacity expires",s1_p1:"Usage that is not consumed within the period disappears. The subscriber pays for it and nobody benefits from it.",
+s1_k2:"Upgrades",s1_h2:"Paid usage is not credited",s1_p2:"Moving to a higher tier mid-cycle does not reflect the unused, already-paid portion of the current plan.",
+s1_k3:"Mismatch",s1_h3:"Demand is uneven",s1_p3:"Some subscribers hit their limits while others leave capacity idle. There is no mechanism to reallocate it.",
+s2_t:"The proposal in three stages",
+s2_l:"The proposal is deliberately incremental. Stage 1 is a policy change; Stage 2 introduces a market only after Stage 1 is in place; Stage 3 adds futures once the market has stable data.",
+s2_n1:"Stage 1",s2_h1:"Upgrade credit",s2_p1:"When a subscriber upgrades, the unused, already-paid portion of the current plan is credited toward the new plan. No new infrastructure beyond billing logic.",s2_g1:"Policy change",
+s2_n2:"Stage 2",s2_h2:"Usage block market",s2_p2:"Subscribers can list unused usage as standard blocks. Most blocks are sold at a fixed xAI price; a share trades freely at market price. The platform sets the rules, the floor and the fee per block sold.",s2_g2:"Controlled pilot",
+s2_n3:"Stage 3",s2_h3:"Futures",s2_p3:"Subscribers can buy blocks in advance, at a discount, for activation on a future date. Introduced only after the block market has stable data (section 6).",s2_g3:"Later extension",
+s3_t:"Standard usage blocks",
+s3_l:"To make usage tradable, it is packaged into standard, fungible blocks. Each block has a fixed size, a tier and an expiry date.",
+s3_b1:"Blocks are defined by the platform, not by users, so every block of the same tier is interchangeable.",
+s3_b2:"Blocks stay within their tier: Plus blocks trade in the Plus market, Ultra blocks in the Ultra market.",
+s3_b3:"Each block carries its own expiry, which drives its price as it approaches.",
+s3_cap:"Illustrative period divided into 30 standard blocks",
+s3_m1:"Plus market",s3_m1s:"Plus blocks, Plus buyers",s3_m2:"Ultra market",s3_m2s:"Ultra blocks, Ultra buyers",
+s4_t:"Pricing mechanism",
+s4_l:"Prices follow a transparent 80/20 rule. 80% of the blocks offered are sold at a fixed xAI price that declines as expiry approaches, never below the plan floor. The remaining 20% trade freely at a market price driven by demand, protected by a floor and with no ceiling.",
+sim_t:"Price simulator",
+illus:"Illustrative example values; real values would be set by xAI.",
+c_plan:"Plan market",c_days:"Days remaining on the block",c_dem:"Market demand",
+ch_lo:"Low",ch_md:"Medium",ch_hi:"High",
+st_x:"xAI price (80% of blocks)",st_m:"Market price (20% of blocks)",st_f:"Floor",st_u:"% of list price",
+ch_aria:"Chart of the xAI price and the market price by days remaining",
+lg_x:"xAI price (80% of blocks)",lg_m:"Market price (20% of blocks)",lg_f:"Floor",
+model:"Model: xAI price = max(floor, 100 × (1 − 0.5 × (7 − d) / 6)), applies to 80% of blocks; market price = max(floor, xAI price × demand), applies to 20% of blocks. Floor: Plus {a}%, Ultra {b}%. xAI charges a fee per block sold (example value: 4 points of list price).",
+ax_d:"Days remaining",ax_p:"% of list",fl_lbl:"Floor {n}%",ls_lbl:"List 100%",
+dd:"{n} d",dd_a:"{n} days",dm:"×{n}",
+bd_g:"Market above list price: no ceiling. The freely traded 20% of blocks reflects scarcity; xAI charges a fee per block sold.",
+bd_r:"At the floor: market price held at {n}% of list price. xAI charges a fee per block sold.",
+bd_n:"Market between the floor and list price. xAI charges a fee per block sold.",
+s4_h1:"80/20 rule",s4_p1:"Of the blocks offered, 80% are sold at the fixed xAI price and 20% trade freely at market price. This keeps prices predictable while letting demand signal real value. xAI charges a fee per block sold, for example 4 points of list price.",
+s4_h2:"Floor, no ceiling",s4_p2:"A minimum price per tier prevents dumping. There is no upper limit, so scarce capacity can reach its real value.",
+s4_h3:"Time decay",s4_p3:"The xAI price declines as expiry approaches, but never below the plan floor, which encourages early listing and steady supply.",
+s44_t:"4.4 Simultaneous versus staggered expiry",
+s44_l:"If every block expires on the same day, supply arrives all at once and prices collapse to the floor. Staggering expiry across the period smooths supply.",
+wk1_t:"Simultaneous expiry",wk1_p:"All blocks reach expiry on day 7: a single supply spike and prices at the floor.",
+wk2_t:"Staggered expiry",wk2_p:"Blocks expire on different days: supply is spread evenly and prices stay stable.",
+cv_day:"D{n}",cv_sp:"Supply spike",cv_ev:"Even supply",
+s5_t:"Market flow",
+s5_l:"All transactions happen inside the platform. No usage leaves the ecosystem and no external payment rails are involved.",
+f_sel:"Seller",f_sels:"lists unused blocks",f_mk:"Market",f_mks:"inside the platform",f_buy:"Buyer",f_buys:"same plan tier",f_fee:"Platform fee",f_fees:"charged per block sold",f_cr:"sale proceeds credited to the seller's balance",
+fs1t:"1. List",fs1:"The seller lists one or more unused blocks.",
+fs2t:"2. Price",fs2:"The rule sets the price from time to expiry and demand.",
+fs3t:"3. Match",fs3:"A buyer on the same tier acquires the block.",
+fs4t:"4. Settle",fs4:"Usage moves to the buyer; credit goes to the seller.",
+s6_t:"Futures (Stage 3)",
+s6_l:"Once the spot market is stable, subscribers could buy blocks that activate in a future week at a discount, giving the platform predictable demand.",
+fu_t:"Futures calculator",
+fu_f:"Future = List × (1 − annual rate × weeks / 52)",
+fu_w:"Weeks until activation",fu_r:"Annual discount rate",fu_out:"Future price",
+fu_fl:"Floor 40%",fu_list:"List 100%",
+fu_unit:"% of list",
+fu_n:"Discount of {n}% for activation in {w} weeks.",
+fu_nf:"The formula would go below the floor; the price is held at 40% of list.",
+fu_wv:"{n} wk",
+s7_t:"Anti-abuse safeguards",
+s7_l:"A market for usage only works if it cannot be used for arbitrage, laundering or automated farming. The following rules would apply from the pilot onward.",
+rules:["Only paid subscribers can list or buy blocks.","Blocks trade only within the same tier.","Sellers receive platform credit, not cash.","Credit cannot be withdrawn or transferred outside the platform.","Accounts must be in good standing for a minimum period before listing.","Listing limits per account and per period.","Purchase limits per account and per period.","Purchased blocks cannot be resold.","The xAI price is set by rule, and the market price cannot fall below the floor of its tier.","Identity and payment-method checks to detect multi-accounting.","Automated monitoring for unusual trading patterns.","The platform can suspend the market or adjust parameters at any time."],
+s8_t:"Benefits by participant",
+s8_k1:"Light users",s8_h1:"Lower effective cost",s8_p1:"Recover part of the value of usage they would otherwise lose.",
+s8_k2:"Heavy users",s8_h2:"Cheaper extra capacity",s8_p2:"Access additional usage without moving to a higher tier.",
+s8_k3:"Platform",s8_h3:"Revenue and retention",s8_p3:"Fee revenue on each block sold, potentially fewer cancellations and better data on real demand.",
+s9_t:"Open risks",
+s9_h1:"Cannibalization",s9_p1:"Some upgrades could be replaced by block purchases. Tier boundaries and limits mitigate this.",
+s9_h2:"Compute planning",s9_p2:"Resold usage is consumed rather than expiring, which increases realized load.",
+s9_h3:"Regulatory treatment",s9_p3:"Credits and resale may have accounting, tax or consumer-law implications by jurisdiction.",
+s9_h4:"Complexity",s9_p4:"A market adds product surface. A limited pilot keeps it contained.",
+s10_t:"Implementation roadmap",
+s10_l:"Each stage is independent and can be evaluated before moving to the next.",
+r1_k:"Stage 1",r1_h:"Basic fix: upgrade credit",r1_p:"Credit the unused, already-paid portion of the plan on upgrade. Billing change only.",
+r2_k:"Stage 2",r2_h:"Block market pilot",r2_p:"Standard blocks, an 80/20 rule (80% at the xAI price, 20% at market price with a floor), a fee per block sold (example value: 4 points of list price) and safeguards, for a limited group of subscribers.",
+r3_k:"Stage 3",r3_h:"Futures",r3_p:"Discounted blocks for future activation, once the spot market has stable data.",
+s11_t:"Open questions for xAI",
+qs:["Is crediting unused, paid usage on upgrade technically feasible in the current billing system?","What block size and expiry window best match actual usage patterns?","What floor and fee levels would protect both sellers and platform revenue?","Should credit be usable only for usage, or also for subscription renewals?","Which jurisdictions would require specific review before a pilot?","What metrics would define a successful pilot?"],
+cl_t:"Open to discussion",
+cl_l:"This document is a starting point. Feedback from the Grok team and from other subscribers is welcome.",
+cl_a:"Author · October 2026 · Independent proposal by a Grok user. Not affiliated with xAI.",
+cl_b:"Contact on X",
+ft2:"All figures are illustrative example values; real values would be set by xAI. Not legal or financial advice.",
+ft3:"This PDF is a static export of the three-stage proposal. The interactive version includes the price simulator, the futures calculator and the market simulation."
+},
+es:{
+toc_a:"Índice",toc_t:"Índice",hk_t:"En síntesis",hk1n:"3",hk1:"etapas: crédito al subir de plan, mercado de bloques, futuros",hk2n:"80/20",hk2:"de los bloques ofrecidos: al precio xAI / negociados libremente",hk3n:"Piso",hk3:"en el 20 % que se negocia libremente, sin techo",hk4n:"0",hk4:"reventa externa: todo queda dentro de la plataforma",hk_n:"Los valores de las reglas en esta página son ilustrativos.",
+
+skip:"Saltar al contenido",newtab:" (se abre en una pestaña nueva)",a_toL:"Cambiar a modo claro",a_toD:"Cambiar a modo oscuro",f_aria:"Diagrama del flujo del mercado: el vendedor publica bloques sin usar en el mercado dentro de la plataforma, un comprador del mismo plan los adquiere, xAI cobra una comisión por bloque vendido y el importe de la venta se acredita al saldo del vendedor.",cl_s:"Equipo de Grok: con gusto lo conversamos. — @ManuAKoller",fu_n1:"Descuento del {n} % para activación en 1 semana.",n_ms:"Simulación",ms_t:"Simulación del mercado a 12 meses",ms_l:"Una ilustración automática de cómo podría comportarse la regla 80/20 durante un año, semana a semana, en mercados separados para Plus y Ultra. Cada semana los suscriptores ofrecen una cantidad similar de bloques sin usar con vencimientos escalonados. El 80 % se vende al precio xAI, que baja a medida que se acerca el vencimiento pero nunca por debajo del piso del plan, y el 20 % se negocia libremente por encima de ese piso, sin techo. Los bloques que no se venden vencen.",ms_h:"Corrida simulada",ms_il:"Datos de ejemplo. Simulación ilustrativa, no son datos reales de xAI.",ms_ctl:"Corrida",ms_play:"Reproducir",ms_pause:"Pausar",ms_reset:"Reiniciar",ms_new:"Nueva corrida",ms_spd:"Velocidad",ms_plan:"Mercado",ms_tr:"Tendencia de la demanda",tr_low:"Baja",tr_mid:"Media",tr_high:"Alta",ms_ev:"Pico por lanzamiento (semanas 21–26)",ms_fu:"Futuros (Etapa 3)",ms_wk:"Semana {w} de 52 · mes {m}",ms_seed:"Corrida n.º {s}",ms_c1:"Precio medio por bloque vendido, % del precio de lista",ms_lx:"Precio xAI (80 % de los bloques)",ms_lm:"Precio de mercado (20 % de los bloques)",ms_lf:"Piso",ms_c2:"Bloques por semana, índice (100 = oferta media de Plus)",ms_bs:"Vendidos",ms_be:"Vencidos",k1:"Recuperado por los vendedores",k1u:"% del valor de lista de los bloques ofrecidos",k2:"Ahorro de los compradores",k2u:"% por debajo del precio de lista, en promedio",k3:"Comisiones de xAI",k3u:"% del volumen negociado",k4:"Bloques vendidos",k4u:"% de los bloques ofrecidos",ms_rd:"Lectura mensual",ms_rd0:"Al final de cada mes simulado aparece una lectura breve.",ms_a1:"Gráfico de precios, {p}, semana {w}: precio xAI {x}, precio de mercado {m}, piso {f}, todo como porcentaje del precio de lista.",ms_a0:"Gráfico de precios, {p}: la corrida todavía no empezó.",ms_a2:"Gráfico de bloques, {p}, semana {w}: se vendió el {s} de los bloques ofrecidos y venció el {e}.",ms_b0:"Gráfico de bloques, {p}: la corrida todavía no empezó.",rd_m:"Mes {m}",r_hi:"La demanda superó a la oferta",r_lo:"La demanda quedó por debajo de la oferta",r_eq:"La demanda estuvo cerca de la oferta",r_se:" (se vendió el {s} de los bloques ofrecidos y venció el {e}).",r_pm:" El precio de mercado promedió el {pm} del precio de lista, {c} del precio xAI ({px}).",c_up:"por encima",c_dn:"por debajo",c_eq:"cerca",x_ev:" El pico por lanzamiento hizo subir el precio de mercado.",x_fl:" Durante parte del mes el precio de mercado quedó en el piso.",x_cap:" La negociación libre superó el precio de lista, ya que no hay techo.",x_fu:" Los futuros vendieron por anticipado parte de la oferta.",ms_as:"Supuestos del ejemplo, valores que fijaría xAI: la oferta semanal varía hasta un 8 %; la demanda varía hasta un 22 %, con una estacionalidad leve y la tendencia elegida; los compradores toman primero los bloques más baratos y son menos los que compran por encima del precio de lista; la comisión de xAI es de 4 puntos del precio de lista por bloque vendido (valor de ejemplo); los pisos son 40 % para Plus y 45 % para Ultra; la oferta de Ultra es menor que la de Plus; con futuros activados, el 10 % de la oferta se vende con cuatro semanas de anticipación.",brand:"Nota de política",th_part:"Participante",th_ben:"Beneficio",th_det:"Detalle",th_risk:"Riesgo",th_desc:"Descripción y mitigación",n_sum:"Resumen",n_1:"Problema",n_2:"Propuesta",n_4:"Precios",n_6:"Futuros",n_7:"Salvaguardas",n_10:"Hoja de ruta",n_11:"Preguntas",
+a_lang:"Idioma",
+eyebrow:"Propuesta de política de producto · Octubre de 2026",
+h1:"Un mercado secundario para el uso de IA no consumido",
+sub:"Una propuesta en tres etapas para las suscripciones de Grok: acreditar el uso ya pagado al cambiar a un plan superior, permitir la reventa de bloques de uso no consumidos dentro de la plataforma, con precios transparentes y basados en reglas, y más adelante ofrecer futuros sobre esos bloques.",
+date:"Octubre de 2026",read:"9 min de lectura",b_pdf:"Descargar en PDF",b_sim:"Abrir el simulador de precios",
+disc:"Propuesta independiente de un usuario de Grok. Sin afiliación con xAI.",
+sum_t:"Resumen ejecutivo",
+sum1:"<b>Problema.</b> El uso de la suscripción que se paga pero no se consume vence sin valor, y el cambio a un plan superior a mitad de ciclo no tiene en cuenta lo ya pagado.",
+sum2:"<b>Etapa 1.</b> Acreditar la parte no consumida y ya pagada del plan actual al cambiar a un plan superior. Baja complejidad y una mejora inmediata en equidad.",
+sum3:"<b>Etapa 2.</b> Un piloto de mercado interno de bloques de uso estándar con una regla 80/20: el 80 % de los bloques ofrecidos se vende a un precio fijo de xAI que disminuye hacia el vencimiento sin bajar nunca del piso del plan, y el 20 % se negocia libremente a precio de mercado, con piso y sin techo. xAI cobra una comisión por bloque vendido (valor de ejemplo: 4 puntos del precio de lista).",
+sum3f:"<b>Etapa 3.</b> Cuando el mercado tenga datos estables, ofrecer futuros: bloques comprados por adelantado, con descuento, para activarse en una fecha futura.",
+sum4:"<b>Resultado.</b> Menor costo efectivo para usuarios de bajo consumo, capacidad adicional más barata para usuarios intensivos y nuevos ingresos por transacción y mayor retención para la plataforma, sin reventa externa.",
+s1_t:"El problema",
+s1_l:"Las suscripciones de IA se venden como períodos fijos de capacidad, mientras que el uso real es irregular. La diferencia entre lo que se paga y lo que se usa hoy se pierde.",
+s1_k1:"Desperdicio",s1_h1:"La capacidad no usada vence",s1_p1:"El uso que no se consume dentro del período desaparece. El suscriptor lo paga y nadie se beneficia.",
+s1_k2:"Cambios de plan",s1_h2:"El uso pagado no se acredita",s1_p2:"Pasar a un plan superior a mitad de ciclo no refleja la parte no consumida y ya pagada del plan actual.",
+s1_k3:"Desajuste",s1_h3:"La demanda es desigual",s1_p3:"Algunos suscriptores alcanzan sus límites mientras otros dejan capacidad ociosa. No existe un mecanismo para reasignarla.",
+s2_t:"La propuesta en tres etapas",
+s2_l:"La propuesta es deliberadamente gradual. La Etapa 1 es un cambio de política; la Etapa 2 introduce un mercado solo después de implementar la Etapa 1; la Etapa 3 suma futuros cuando el mercado ya tiene datos estables.",
+s2_n1:"Etapa 1",s2_h1:"Crédito por cambio de plan",s2_p1:"Al pasar a un plan superior, la parte no consumida y ya pagada del plan actual se acredita al nuevo plan. No requiere infraestructura nueva más allá de la lógica de facturación.",s2_g1:"Cambio de política",
+s2_n2:"Etapa 2",s2_h2:"Mercado de bloques de uso",s2_p2:"Los suscriptores pueden publicar el uso no consumido como bloques estándar. La mayoría de los bloques se vende a un precio fijo de xAI y una parte se negocia libremente a precio de mercado. La plataforma define las reglas, el piso y la comisión por bloque vendido.",s2_g2:"Piloto controlado",
+s2_n3:"Etapa 3",s2_h3:"Futuros",s2_p3:"Los suscriptores pueden comprar bloques por adelantado, con descuento, para activarlos en una fecha futura. Se introduce solo cuando el mercado de bloques ya tiene datos estables (sección 6).",s2_g3:"Extensión posterior",
+s3_t:"Bloques de uso estándar",
+s3_l:"Para que el uso sea transferible, se agrupa en bloques estándar e intercambiables. Cada bloque tiene un tamaño fijo, un plan y una fecha de vencimiento.",
+s3_b1:"Los bloques los define la plataforma, no los usuarios, de modo que todos los bloques de un mismo plan son intercambiables.",
+s3_b2:"Los bloques se mantienen dentro de su plan: los bloques Plus se negocian en el mercado Plus y los Ultra en el mercado Ultra.",
+s3_b3:"Cada bloque tiene su propio vencimiento, que determina su precio a medida que se acerca.",
+s3_cap:"Período ilustrativo dividido en 30 bloques estándar",
+s3_m1:"Mercado Plus",s3_m1s:"Bloques Plus, compradores Plus",s3_m2:"Mercado Ultra",s3_m2s:"Bloques Ultra, compradores Ultra",
+s4_t:"Mecanismo de precios",
+s4_l:"Los precios siguen una regla 80/20 transparente. El 80 % de los bloques ofrecidos se vende a un precio fijo de xAI que disminuye a medida que se acerca el vencimiento, sin bajar nunca del piso del plan. El 20 % restante se negocia libremente a un precio de mercado determinado por la demanda, con un piso de protección y sin techo.",
+sim_t:"Simulador de precios",
+illus:"Valores de ejemplo ilustrativos; los valores reales los definiría xAI.",
+c_plan:"Mercado del plan",c_days:"Días restantes del bloque",c_dem:"Demanda del mercado",
+ch_lo:"Baja",ch_md:"Media",ch_hi:"Alta",
+st_x:"Precio xAI (80 % de los bloques)",st_m:"Precio de mercado (20 % de los bloques)",st_f:"Piso",st_u:"% del precio de lista",
+ch_aria:"Gráfico del precio xAI y del precio de mercado según los días restantes",
+lg_x:"Precio xAI (80 % de los bloques)",lg_m:"Precio de mercado (20 % de los bloques)",lg_f:"Piso",
+model:"Modelo: precio xAI = máx(piso, 100 × (1 − 0,5 × (7 − d) / 6)), aplica al 80 % de los bloques; precio de mercado = máx(piso, precio xAI × demanda), aplica al 20 % de los bloques. Piso: Plus {a} %, Ultra {b} %. xAI cobra una comisión por bloque vendido (valor de ejemplo: 4 puntos del precio de lista).",
+ax_d:"Días restantes",ax_p:"% de lista",fl_lbl:"Piso {n} %",ls_lbl:"Lista 100 %",
+dd:"{n} d",dd_a:"{n} días",dm:"×{n}",
+bd_g:"Mercado por encima del precio de lista: sin techo. El 20 % de los bloques, que se negocia libremente, refleja la escasez; xAI cobra una comisión por bloque vendido.",
+bd_r:"En el piso: el precio de mercado se mantiene en el {n} % del precio de lista. xAI cobra una comisión por bloque vendido.",
+bd_n:"Mercado entre el piso y el precio de lista. xAI cobra una comisión por bloque vendido.",
+s4_h1:"Regla 80/20",s4_p1:"De los bloques ofrecidos, el 80 % se vende al precio fijo de xAI y el 20 % se negocia libremente a precio de mercado. Así los precios son previsibles y la demanda puede reflejar el valor real. xAI cobra una comisión por bloque vendido, por ejemplo 4 puntos del precio de lista.",
+s4_h2:"Piso, sin techo",s4_p2:"Un precio mínimo por plan evita ventas a precio de remate. No hay límite superior, de modo que la capacidad escasa puede alcanzar su valor real.",
+s4_h3:"Depreciación temporal",s4_p3:"El precio xAI disminuye a medida que se acerca el vencimiento, sin bajar nunca del piso del plan, lo que incentiva publicar con anticipación y mantiene una oferta constante.",
+s44_t:"4.4 Vencimiento simultáneo frente a escalonado",
+s44_l:"Si todos los bloques vencen el mismo día, la oferta llega de golpe y los precios caen al piso. Escalonar los vencimientos a lo largo del período suaviza la oferta.",
+wk1_t:"Vencimiento simultáneo",wk1_p:"Todos los bloques vencen el día 7: un único pico de oferta y precios en el piso.",
+wk2_t:"Vencimiento escalonado",wk2_p:"Los bloques vencen en días distintos: la oferta se distribuye de forma pareja y los precios se mantienen estables.",
+cv_day:"D{n}",cv_sp:"Pico de oferta",cv_ev:"Oferta pareja",
+s5_t:"Flujo del mercado",
+s5_l:"Todas las transacciones ocurren dentro de la plataforma. El uso no sale del ecosistema y no intervienen medios de pago externos.",
+f_sel:"Vendedor",f_sels:"publica bloques sin usar",f_mk:"Mercado",f_mks:"dentro de la plataforma",f_buy:"Comprador",f_buys:"mismo plan",f_fee:"Comisión",f_fees:"cobrada por bloque vendido",f_cr:"el importe de la venta se acredita al saldo del vendedor",
+fs1t:"1. Publicación",fs1:"El vendedor publica uno o más bloques sin usar.",
+fs2t:"2. Precio",fs2:"La regla fija el precio según el tiempo al vencimiento y la demanda.",
+fs3t:"3. Asignación",fs3:"Un comprador del mismo plan adquiere el bloque.",
+fs4t:"4. Liquidación",fs4:"El uso pasa al comprador y el crédito, al vendedor.",
+s6_t:"Futuros (Etapa 3)",
+s6_l:"Una vez estable el mercado al contado, los suscriptores podrían comprar con descuento bloques que se activan en una semana futura, lo que le da a la plataforma una demanda previsible.",
+fu_t:"Calculadora de futuros",
+fu_f:"Futuro = Lista × (1 − tasa anual × semanas / 52)",
+fu_w:"Semanas hasta la activación",fu_r:"Tasa de descuento anual",fu_out:"Precio futuro",
+fu_fl:"Piso 40 %",fu_list:"Lista 100 %",
+fu_unit:"% de lista",
+fu_n:"Descuento del {n} % para activación en {w} semanas.",
+fu_nf:"La fórmula quedaría por debajo del piso; el precio se mantiene en el 40 % de lista.",
+fu_wv:"{n} sem.",
+s7_t:"Salvaguardas contra abusos",
+s7_l:"Un mercado de uso solo funciona si no puede emplearse para arbitraje, lavado o explotación automatizada. Las siguientes reglas se aplicarían desde el piloto.",
+rules:["Solo los suscriptores pagos pueden publicar o comprar bloques.","Los bloques se negocian solo dentro del mismo plan.","Los vendedores reciben crédito en la plataforma, no dinero.","El crédito no puede retirarse ni transferirse fuera de la plataforma.","Las cuentas deben tener una antigüedad mínima sin incidencias antes de publicar.","Límites de publicación por cuenta y por período.","Límites de compra por cuenta y por período.","Los bloques comprados no pueden revenderse.","El precio xAI se fija por regla y el precio de mercado no puede quedar por debajo del piso de su plan.","Verificación de identidad y de medio de pago para detectar cuentas múltiples.","Monitoreo automatizado de patrones de negociación inusuales.","La plataforma puede suspender el mercado o ajustar parámetros en cualquier momento."],
+s8_t:"Beneficios por participante",
+s8_k1:"Usuarios de bajo consumo",s8_h1:"Menor costo efectivo",s8_p1:"Recuperan parte del valor del uso que de otro modo perderían.",
+s8_k2:"Usuarios intensivos",s8_h2:"Capacidad adicional más barata",s8_p2:"Acceden a uso adicional sin pasar a un plan superior.",
+s8_k3:"Plataforma",s8_h3:"Ingresos y retención",s8_p3:"Ingresos por comisión en cada bloque vendido, posiblemente menos cancelaciones y mejores datos sobre la demanda real.",
+s9_t:"Riesgos abiertos",
+s9_h1:"Canibalización",s9_p1:"Algunos cambios de plan podrían reemplazarse por compras de bloques. Los límites entre planes y por cuenta lo mitigan.",
+s9_h2:"Planificación de cómputo",s9_p2:"El uso revendido se consume en lugar de vencer, lo que aumenta la carga efectiva.",
+s9_h3:"Tratamiento regulatorio",s9_p3:"Los créditos y la reventa pueden tener implicancias contables, fiscales o de defensa del consumidor según la jurisdicción.",
+s9_h4:"Complejidad",s9_p4:"Un mercado agrega superficie de producto. Un piloto acotado permite contenerla.",
+s10_t:"Hoja de ruta de implementación",
+s10_l:"Cada etapa es independiente y puede evaluarse antes de pasar a la siguiente.",
+r1_k:"Etapa 1",r1_h:"Corrección básica: crédito por cambio de plan",r1_p:"Acreditar la parte no consumida y ya pagada del plan al cambiar a uno superior. Solo requiere cambios en facturación.",
+r2_k:"Etapa 2",r2_h:"Piloto del mercado de bloques",r2_p:"Bloques estándar, regla 80/20 (80 % al precio xAI y 20 % a precio de mercado con piso), comisión por bloque vendido (valor de ejemplo: 4 puntos del precio de lista) y salvaguardas, para un grupo acotado de suscriptores.",
+r3_k:"Etapa 3",r3_h:"Futuros",r3_p:"Bloques con descuento para activación futura, una vez que el mercado al contado tenga datos estables.",
+s11_t:"Preguntas abiertas para xAI",
+qs:["¿Es técnicamente viable acreditar el uso pagado y no consumido al cambiar de plan con el sistema de facturación actual?","¿Qué tamaño de bloque y qué ventana de vencimiento se ajustan mejor a los patrones de uso reales?","¿Qué niveles de piso y de comisión protegerían tanto a los vendedores como los ingresos de la plataforma?","¿El crédito debería usarse solo para uso o también para renovar la suscripción?","¿Qué jurisdicciones requerirían una revisión específica antes de un piloto?","¿Qué métricas definirían un piloto exitoso?"],
+cl_t:"Abierto a la conversación",
+cl_l:"Este documento es un punto de partida. Se agradecen los comentarios del equipo de Grok y de otros suscriptores.",
+cl_a:"Autor · Octubre de 2026 · Propuesta independiente de un usuario de Grok. Sin afiliación con xAI.",
+cl_b:"Contacto en X",
+ft2:"Todas las cifras son valores de ejemplo ilustrativos; los valores reales los definiría xAI. No constituye asesoramiento legal ni financiero.",
+ft3:"Este PDF es una exportación estática de la propuesta en tres etapas. La versión interactiva incluye el simulador de precios, la calculadora de futuros y la simulación del mercado."
+}};
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+let L='en';
+const FLOOR={plus:40,ultra:45};
+function t(k,v){let s=(I18N[L]&&I18N[L][k]!=null)?I18N[L][k]:(I18N.en[k]??k);if(v&&typeof s==='string')for(const x in v)s=s.split('{'+x+'}').join(v[x]);return s}
+function fmt(n,d=0){return new Intl.NumberFormat(L==='es'?'es-ES':'en-US',{maximumFractionDigits:d,minimumFractionDigits:0}).format(n)}
+function pct(n){return L==='es'?n+'\u00a0%':n+'%'}
+function pickLang(){
+ const q=new URLSearchParams(location.search).get('lang');if(q==='es'||q==='en')return q;
+ try{const s=localStorage.getItem('lang');if(s==='es'||s==='en')return s}catch(e){}
+ return (navigator.language||'en').toLowerCase().startsWith('es')?'es':'en';
+}
+function setLang(l,save){
+ L=l;document.documentElement.lang=l;
+ $$('[data-i]').forEach(e=>{e.innerHTML=t(e.dataset.i,{a:FLOOR.plus,b:FLOOR.ultra})});
+ $$('[data-i-aria]').forEach(e=>e.setAttribute('aria-label',t(e.dataset.iAria)));
+ $$('.lang button').forEach(b=>{b.classList.toggle('on',b.dataset.l===l);b.setAttribute('aria-pressed',b.dataset.l===l)});
+ document.title=t('h1')+' — Manuel A. Koller';
+ $('#rules').innerHTML=t('rules').map((r,i)=>`<div class="rule"><span class="n">8.${i+1}</span><p>${r}</p></div>`).join('');
+ $('#qs').innerHTML=t('qs').map(q=>`<li>${q}</li>`).join('');
+ if(save){try{localStorage.setItem('lang',l)}catch(e){}
+  const u=new URL(location.href);if(u.searchParams.has('lang')){u.searchParams.set('lang',l);history.replaceState(null,'',u)}}
+ upTheme();sim();fut();drawWeeks();navFade();if(MS.run)msRelang();
+}
+/* theme */
+function upTheme(){$('#theme').setAttribute('aria-label',t(document.documentElement.dataset.theme==='dark'?'a_toL':'a_toD'))}
+function setTheme(th,save){document.documentElement.dataset.theme=th;upTheme();$('meta[name=theme-color]').content=th==='dark'?'#0e0e11':'#ffffff';if(save){try{localStorage.setItem('theme',th)}catch(e){}}drawWeeks();sim();if(MS.run)msDraw()}
+$('#theme').onclick=()=>setTheme(document.documentElement.dataset.theme==='dark'?'light':'dark',true);
+$$('.lang button').forEach(b=>b.onclick=()=>setLang(b.dataset.l,true));
+/* blocks */
+$('#blockviz').innerHTML='<div class="blk"></div>'.repeat(30);
+/* simulator */
+let plan='plus';
+const xp=d=>Math.max(FLOOR[plan],100*(1-0.5*(7-d)/6));
+const mkt=(d,dm)=>Math.max(FLOOR[plan],xp(d)*dm);
+function fill(r){const p=(r.value-r.min)/(r.max-r.min)*100;r.style.setProperty('--p',p+'%')}
+function sim(){
+ const d=+$('#days').value,dm=+$('#dem').value,f=FLOOR[plan],x=xp(d),m=mkt(d,dm);
+ fill($('#days'));fill($('#dem'));
+ $('#oDays').textContent=t('dd',{n:fmt(d,2)});$('#oDem').textContent=t('dm',{n:fmt(dm,2)});$('#days').setAttribute('aria-valuetext',t('dd_a',{n:fmt(d,2)}));$('#dem').setAttribute('aria-valuetext',$('#oDem').textContent);
+ const u=`<span>${L==='es'?'\u00a0%':'%'}</span>`;
+ $('#vX').innerHTML=fmt(x,1)+u;$('#vM').innerHTML=fmt(m,1)+u;$('#vF').innerHTML=fmt(f,0)+u;
+ const b=$('#badge'),st=$('#stM');b.className='badge';st.className='stat';
+ if(m<=f+1e-9){b.classList.add('r');st.classList.add('cold');b.textContent=t('bd_r',{n:f})}
+ else if(m>100){b.classList.add('g');st.classList.add('hot');b.textContent=t('bd_g')}
+ else b.textContent=t('bd_n');
+ /* chart */
+ const X0=56,X1=600,Y0=250,Y1=18,YM=170,sx=v=>X0+(7-v)/7*(X1-X0),sy=v=>Y0-v/YM*(Y0-Y1);
+ let g='';
+ [0,40,80,120,160].forEach(v=>{g+=`<line class="gl" x1="${X0}" x2="${X1}" y1="${sy(v)}" y2="${sy(v)}"/><text class="tk" x="${X0-8}" y="${sy(v)+4}" text-anchor="end">${v}</text>`});
+ for(let i=7;i>=0;i--)g+=`<text class="tk" x="${sx(i)}" y="${Y0+20}" text-anchor="middle">${i}</text>`;
+ g+=`<text class="tk axl" x="${(X0+X1)/2}" y="${Y0+42}" text-anchor="middle">${t('ax_d')}</text>`;
+ let px='',pm='',area='';
+ for(let i=0;i<=56;i++){const v=7-i/8;px+=(i?'L':'M')+sx(v).toFixed(1)+' '+sy(xp(v)).toFixed(1);pm+=(i?'L':'M')+sx(v).toFixed(1)+' '+sy(mkt(v,dm)).toFixed(1)}
+ area=pm+`L${sx(0)} ${Y0}L${sx(7)} ${Y0}Z`;
+ g+=`<path class="am" d="${area}"/>`;
+ g+=`<line class="ll" x1="${X0}" x2="${X1}" y1="${sy(100)}" y2="${sy(100)}" stroke-dasharray="2 4"/><text class="tl" x="${X1}" y="${sy(100)-6}" text-anchor="end">${t('ls_lbl')}</text>`;
+ g+=`<line class="fl" x1="${X0}" x2="${X1}" y1="${sy(f)}" y2="${sy(f)}" stroke-width="1.5" stroke-dasharray="5 4"/><text class="tf" x="${X1}" y="${sy(f)+16}" text-anchor="end">${t('fl_lbl',{n:f})}</text>`;
+ g+=`<path class="cx" d="${px}" fill="none" stroke-width="2.25" stroke-dasharray="10 6"/><path class="cm" d="${pm}" fill="none" stroke-width="2.5"/>`;
+ g+=`<line class="vl" x1="${sx(d)}" x2="${sx(d)}" y1="${Y1}" y2="${Y0}" stroke-dasharray="2 3"/>`;
+ g+=`<circle class="dx" cx="${sx(d)}" cy="${sy(x)}" r="5" stroke-width="2"/><circle class="dm" cx="${sx(d)}" cy="${sy(m)}" r="6" stroke-width="2"/>`;
+ $('#chart').innerHTML=g;
+}
+$$('#planSeg button').forEach(b=>b.onclick=()=>{plan=b.dataset.v;$$('#planSeg button').forEach(x=>{x.classList.toggle('on',x===b);x.setAttribute('aria-pressed',x===b)});sim()});
+$('#days').oninput=sim;$('#dem').oninput=sim;
+$$('.chips button').forEach(b=>b.onclick=()=>{$('#dem').value=b.dataset.d;sim()});
+/* futures */
+function fut(){
+ const w=+$('#wks').value,r=+$('#rate').value,raw=100*(1-r*w/52),p=Math.max(40,raw);
+ fill($('#wks'));fill($('#rate'));
+ $('#oW').textContent=t('fu_wv',{n:w});$('#oR').textContent=pct(fmt(r*100,0));$('#wks').setAttribute('aria-valuetext',$('#oW').textContent);$('#rate').setAttribute('aria-valuetext',$('#oR').textContent);
+ $('#vFut').innerHTML=fmt(p,1)+`<span> ${t('fu_unit')}</span>`;
+ $('#fBar').style.width=p+'%';$('#fFloor').style.left='40%';
+ $('#fNote').textContent=raw<40?t('fu_nf'):t(w===1?'fu_n1':'fu_n',{n:fmt(100-p,1),w});
+}
+$('#wks').oninput=fut;$('#rate').oninput=fut;
+/* staggered expiry canvases */
+let wkP=0;
+function cssv(n){return getComputedStyle(document.documentElement).getPropertyValue(n).trim()}
+function drawCv(cv,data,label,peak){
+ const r=cv.getBoundingClientRect(),dpr=window.devicePixelRatio||1;if(!r.width)return;
+ cv.width=r.width*dpr;cv.height=r.height*dpr;const c=cv.getContext('2d');c.setTransform(dpr,0,0,dpr,0,0);
+ const W=r.width,H=r.height,pad=6,bot=22,top=26,cw=(W-pad*2)/7,mx=Math.max(...data);
+ c.clearRect(0,0,W,H);c.font='12px '+cssv('--sans');c.textAlign='center';
+ for(let i=0;i<7;i++){
+  const x=pad+i*cw+cw*0.18,bw=cw*0.64,full=H-bot-top,h=full*data[i]/mx*wkP;
+  c.fillStyle=cssv('--soft');c.fillRect(x,top,bw,full);
+  c.fillStyle=(peak&&i===6)?cssv('--neg'):cssv('--acc');c.globalAlpha=(peak&&i!==6)?.55:.85;
+  c.fillRect(x,H-bot-h,bw,h);c.globalAlpha=1;
+  c.fillStyle=cssv('--dim');c.fillText(t('cv_day',{n:i+1}),x+bw/2,H-6);
+ }
+ c.fillStyle=peak?cssv('--neg'):cssv('--acc2');c.font='600 12px '+cssv('--sans');
+ if(peak){c.textAlign='right';c.fillText(label,W-pad,16)}else{c.textAlign='left';c.fillText(label,pad,16)}
+}
+function drawWeeks(){
+ drawCv($('#cvSame'),[.6,.6,.6,.6,.6,.6,10],t('cv_sp'),true);
+ drawCv($('#cvStag'),[2.1,2,2.2,2,2.1,2,2.1],t('cv_ev'),false);
+}
+function animWeeks(){const s=performance.now();(function f(n){wkP=Math.min(1,(n-s)/900);wkP=1-Math.pow(1-wkP,3);drawWeeks();if(wkP<1)requestAnimationFrame(f)})(s)}
+/* reveal + nav */
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');if(e.target.id==='weeks')animWeeks();io.unobserve(e.target)}}),{threshold:.12});
+$$('.reveal,.flow,.split .card').forEach(e=>io.observe(e));
+const secs=['summary','s1','s2','s4','s6','msim','s7','s10','s11'].map(id=>document.getElementById(id));
+addEventListener('scroll',()=>{
+ const h=document.documentElement,p=h.scrollTop/(h.scrollHeight-h.clientHeight);$('#prog').style.width=(p*100)+'%';
+ let cur=null;secs.forEach(s=>{if(s.getBoundingClientRect().top<120)cur=s.id});
+ $$('#links a').forEach(a=>{const on=a.getAttribute('href')==='#'+cur;if(on&&!a.classList.contains('on'))navShow(a);a.classList.toggle('on',on);on?a.setAttribute('aria-current','true'):a.removeAttribute('aria-current')});
+ let c2=null;$$('#toc a').forEach(a=>{const x=document.getElementById(a.getAttribute('href').slice(1));if(x&&x.getBoundingClientRect().top<120)c2=a});$$('#toc a').forEach(a=>{a.classList.toggle('on',a===c2);a===c2?a.setAttribute('aria-current','true'):a.removeAttribute('aria-current')});
+},{passive:true});
+function navFade(){const l=$('#links'),m=l.scrollWidth-l.clientWidth;l.classList.toggle('fl',m>2&&l.scrollLeft>2);l.classList.toggle('fr',m>2&&l.scrollLeft<m-2)}
+function navShow(a){const l=$('#links'),lr=l.getBoundingClientRect(),ar=a.getBoundingClientRect();if(ar.left<lr.left+32||ar.right>lr.right-32)l.scrollTo({left:l.scrollLeft+ar.left-lr.left-(lr.width-ar.width)/2,behavior:'smooth'})}
+$('#links').addEventListener('scroll',navFade,{passive:true});
+let rz;addEventListener('resize',()=>{clearTimeout(rz);rz=setTimeout(()=>{drawWeeks();navFade();msDraw()},120)});
+/* market simulation (illustrative) */
+const MS={w:0,seed:2026,spd:1,tr:'mid',plan:'plus',play:false,tm:null,seen:false,resume:false,run:null,last:-1};
+const RM=matchMedia('(prefers-reduced-motion: reduce)');
+const MSP={plus:{fl:40,d0:.92,sup:100},ultra:{fl:45,d0:1.02,sup:55}},MSFEE=4,MSTR={low:-.007,mid:.002,high:.011};
+function rng(a){return()=>{a=a+0x6D2B79F5|0;let q=Math.imul(a^a>>>15,1|a);q=q+Math.imul(q^q>>>7,61|q)^q;return((q^q>>>14)>>>0)/4294967296}}
+function msCalc(){
+ const R=rng(MS.seed),ev=$('#msEv').checked,fu=$('#msFu').checked,out={};
+ for(const p of ['plus','ultra']){
+  const P=MSP[p],W=[];let dm=1;
+  for(let w=0;w<52;w++){
+   const S=P.sup*(1+.08*(2*R()-1)),boost=ev&&w>=20&&w<26?1+.75*Math.exp(-(w-20)/1.8):1;
+   const D0=P.sup*P.d0*Math.exp(MSTR[MS.tr]*w)*(1+.05*Math.sin(w/52*4*Math.PI))*boost*(1+.22*(2*R()-1));
+   const F=fu?.1*S:0,fp=100*(1-.3*4/52),Sp=S-F;let rem=Math.max(0,D0-F*.9);
+   dm=.5*dm+.5*Math.pow(rem/Sp,1.5);
+   const pm=Math.max(P.fl,75*dm),offers=[];
+   for(let d=1;d<=7;d++)offers.push({q:.8*Sp/7,pr:Math.max(P.fl,100*(1-.5*(7-d)/6)),x:1});
+   offers.push({q:.2*Sp,pr:pm,x:0});offers.sort((a,b)=>a.pr-b.pr);
+   let sx=0,px=0,sm=0,paid=F*fp;
+   for(const o of offers){const will=o.pr<=100?1:Math.max(.2,1-(o.pr-100)/60),q=Math.min(o.q,rem*will);rem-=q;paid+=q*o.pr;if(o.x){sx+=q;px+=q*o.pr}else sm+=q}
+   const sold=sx+sm+F;
+   W.push({S,sold,exp:S-sold,px:sx?px/sx:null,pm,fl:P.fl,r:D0/S,paid,fee:MSFEE*sold,ev:boost>1.05,fu:F>0});
+  }
+  out[p]=W;
+ }
+ MS.run=out;
+}
+const msMon=w=>Math.min(12,Math.floor(w*12/52)+1);
+function msCum(W,n){let o=0,so=0,pa=0,fe=0;for(let i=0;i<n;i++){o+=W[i].S;so+=W[i].sold;pa+=W[i].paid;fe+=W[i].fee}return{rec:(pa-fe)/(o*100)*100,sav:(1-pa/(so*100))*100,fee:fe/pa*100,st:so/o*100}}
+function msRead(W,m){
+ const ws=W.map((x,i)=>[x,i]).filter(([x,i])=>msMon(i)===m).map(a=>a[0]);if(!ws.length)return'';
+ const A=k=>ws.reduce((s,x)=>s+(x[k]??0),0)/ws.length,o=ws.reduce((s,x)=>s+x.S,0),so=ws.reduce((s,x)=>s+x.sold,0);
+ const r=A('r'),pm=A('pm'),pxs=ws.filter(x=>x.px!=null),px=pxs.reduce((s,x)=>s+x.px,0)/(pxs.length||1),P=v=>pct(fmt(v,0));
+ let txt='<b>'+t('rd_m',{m})+'.</b> '+t(r>1.08?'r_hi':r<.92?'r_lo':'r_eq')+t('r_se',{s:P(so/o*100),e:P(100-so/o*100)})+t('r_pm',{pm:P(pm),c:t(pm>px+3?'c_up':pm<px-3?'c_dn':'c_eq'),px:P(px)});
+ if(ws.some(x=>x.ev))txt+=t('x_ev');
+ if(ws.filter(x=>x.pm<=x.fl+.01).length>=ws.length/2)txt+=t('x_fl');
+ else if(ws.some(x=>x.pm>100))txt+=t('x_cap');
+ if(ws[0].fu)txt+=t('x_fu');
+ return txt;
+}
+function msCv(cv){const r=cv.getBoundingClientRect(),dpr=Math.min(3,window.devicePixelRatio||1);if(!r.width)return null;if(cv.width!==Math.round(r.width*dpr)||cv.height!==Math.round(r.height*dpr)){cv.width=Math.round(r.width*dpr);cv.height=Math.round(r.height*dpr)}const c=cv.getContext('2d');c.setTransform(dpr,0,0,dpr,0,0);c.clearRect(0,0,r.width,r.height);return{c,W:r.width,H:r.height}}
+function msDraw(){
+ if(!MS.run)return;const W=MS.run[MS.plan],n=MS.w,C={acc:cssv('--acc'),acc2:cssv('--acc2'),neg:cssv('--neg'),dim:cssv('--dim'),line:cssv('--line'),soft:cssv('--soft'),sans:cssv('--sans')};
+ const L0=34,R0=8,T0=10,B0=22,ev=$('#msEv').checked;
+ let g=msCv($('#msCvP'));
+ if(g){const{c,W:w,H:h}=g,mx=Math.max(130,...W.slice(0,Math.max(n,1)).map(x=>x.pm+10)),X=i=>L0+(w-L0-R0)*i/51,Y=v=>T0+(h-T0-B0)*(1-v/mx);
+  c.font='11px '+C.sans;c.fillStyle=C.dim;c.strokeStyle=C.line;c.lineWidth=1;c.textAlign='right';
+  if(ev){c.fillStyle=C.soft;c.fillRect(X(20),T0,X(25)-X(20),h-T0-B0)}
+  for(const v of [0,50,100]){c.beginPath();c.moveTo(L0,Y(v)+.5);c.lineTo(w-R0,Y(v)+.5);c.stroke();c.fillStyle=C.dim;c.fillText(v,L0-6,Y(v)+4)}
+  c.textAlign='center';for(const i of [0,12,25,38,51])c.fillText(i+1,X(i),h-6);
+  const line=(k,col,dash)=>{c.beginPath();c.setLineDash(dash||[]);c.strokeStyle=col;c.lineWidth=2;let st=false;for(let i=0;i<n;i++){const v=W[i][k];if(v==null){st=false;continue}st?c.lineTo(X(i),Y(v)):c.moveTo(X(i),Y(v));st=true}c.stroke();c.setLineDash([])};
+  line('fl',C.neg,[4,4]);line('px',C.acc,[10,6]);line('pm',C.acc2);
+  if(n){const z=W[n-1];c.fillStyle=C.acc2;c.beginPath();c.arc(X(n-1),Y(z.pm),3.5,0,7);c.fill()}
+ }
+ g=msCv($('#msCvB'));
+ if(g){const{c,W:w,H:h}=g,mx=140,bw=(w-L0-R0)/52,Y=v=>T0+(h-T0-B0)*(1-v/mx);
+  c.font='11px '+C.sans;c.strokeStyle=C.line;c.lineWidth=1;c.textAlign='right';
+  for(const v of [0,50,100]){c.beginPath();c.moveTo(L0,Y(v)+.5);c.lineTo(w-R0,Y(v)+.5);c.stroke();c.fillStyle=C.dim;c.fillText(v,L0-6,Y(v)+4)}
+  c.textAlign='center';for(const i of [0,12,25,38,51])c.fillText(i+1,L0+bw*(i+.5),h-6);
+  for(let i=0;i<n;i++){const z=W[i],x=L0+bw*i+bw*.15,b=bw*.7;c.fillStyle=C.acc;c.globalAlpha=.85;c.fillRect(x,Y(z.sold),b,Y(0)-Y(z.sold));c.fillStyle=C.neg;c.globalAlpha=.75;c.fillRect(x,Y(z.S),b,Y(z.sold)-Y(z.S));c.globalAlpha=1}
+ }
+}
+function msRender(){
+ if(!MS.run)return;const W=MS.run[MS.plan],n=MS.w,pl=MS.plan==='plus'?'Plus':'Ultra',P=v=>pct(fmt(v,0));
+ $('#msWk').textContent=t('ms_wk',{w:n,m:n?msMon(n-1):1});$('#msSeed').textContent=t('ms_seed',{s:MS.seed});$('#msBar').style.width=(n/52*100)+'%';
+ if(n){const k=msCum(W,n),z=W[n-1];$('#msK1').textContent=P(k.rec);$('#msK2').textContent=P(k.sav);$('#msK3').textContent=P(k.fee);$('#msK4').textContent=P(k.st);
+  $('#msCvP').setAttribute('aria-label',t('ms_a1',{p:pl,w:n,x:z.px==null?'—':P(z.px),m:P(z.pm),f:P(z.fl)}));$('#msCvB').setAttribute('aria-label',t('ms_a2',{p:pl,w:n,s:P(z.sold/z.S*100),e:P(z.exp/z.S*100)}))}
+ else{['#msK1','#msK2','#msK3','#msK4'].forEach(q=>$(q).textContent='—');$('#msCvP').setAttribute('aria-label',t('ms_a0',{p:pl}));$('#msCvB').setAttribute('aria-label',t('ms_b0',{p:pl}))}
+ const full=n>=52?12:Math.max(0,msMon(n)-1);
+ if(full!==MS.last){const items=[];for(let m=full-1;m>=1;m--)items.push('<li>'+msRead(W,m)+'</li>');$('#msLog').innerHTML=items.join('');$('#msNow').innerHTML=full?msRead(W,full):t('ms_rd0');MS.last=full}
+ $('#msPlayT').textContent=t(MS.play?'ms_pause':'ms_play');$('#msIco').setAttribute('d',MS.play?'M2 1h3v10H2zM7 1h3v10H7z':'M2 1l9 5-9 5z');
+ msDraw();
+}
+function msRelang(){MS.last=-1;msRender()}
+function msTick(){if(!MS.play)return;if(MS.w>=52){msStop();return}MS.w++;msRender();MS.tm=setTimeout(msTick,420/MS.spd)}
+function msGo(){if(MS.w>=52){MS.w=0;MS.last=-1}MS.play=true;clearTimeout(MS.tm);msRender();MS.tm=setTimeout(msTick,120)}
+function msStop(){MS.play=false;clearTimeout(MS.tm);msRender()}
+function msSeg(id,key,cb){$$('#'+id+' button').forEach(b=>b.onclick=()=>{MS[key]=key==='spd'?+b.dataset.v:b.dataset.v;$$('#'+id+' button').forEach(x=>{x.classList.toggle('on',x===b);x.setAttribute('aria-pressed',x===b)});cb&&cb()})}
+msSeg('msSpd','spd');msSeg('msPlan','plan',()=>{MS.last=-1;msRender()});msSeg('msTr','tr',()=>{msCalc();MS.last=-1;msRender()});
+$('#msEv').onchange=$('#msFu').onchange=()=>{msCalc();MS.last=-1;msRender()};
+$('#msPlay').onclick=()=>{MS.resume=false;MS.play?msStop():msGo()};
+$('#msReset').onclick=()=>{MS.w=0;MS.last=-1;msRender();if(MS.play){clearTimeout(MS.tm);MS.tm=setTimeout(msTick,300)}};
+$('#msNew').onclick=()=>{MS.seed=1000+Math.floor(Math.random()*9000);msCalc();MS.w=0;MS.last=-1;msRender();if(!RM.matches||MS.play)msGo()};
+new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){if(!MS.seen){MS.seen=true;if(!RM.matches)msGo()}else if(MS.resume){MS.resume=false;msGo()}}else if(MS.play){MS.resume=true;msStop()}}),{threshold:.5}).observe($('#msCvP'));
+msCalc();
+/* print */
+let preTh=null;
+function prep(){const h=document.documentElement;if(preTh===null)preTh=h.dataset.theme;h.dataset.theme='light';$$('.reveal,.flow,.split .card').forEach(e=>e.classList.add('in'));wkP=1;drawWeeks();msStop();MS.w=52;msRender()}
+addEventListener('beforeprint',prep);
+addEventListener('afterprint',()=>{if(preTh!==null){setTheme(preTh,false);preTh=null}});
+$('#pdf').onclick=$('#pdf2').onclick=()=>{prep();setTimeout(()=>window.print(),60)};
+/* init */
+let th='dark';try{const v=localStorage.getItem('theme');if(v==='light'||v==='dark')th=v}catch(e){}
+setTheme(th,false);
+setLang(pickLang(),false);
+if(matchMedia('print').matches)prep();
+</script>
+</body>
+</html>
